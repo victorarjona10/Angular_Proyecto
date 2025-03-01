@@ -1,0 +1,10 @@
+<h1>Benvingut a la pàgina Home!</h1>
+<p>Aquesta és la pàgina principal després del login correcte.</p>
+
+<div *ngIf="userData">
+  <h2>Dades de l'usuari:</h2>
+  <p><strong>Nom:</strong> {{ userData.name }}</p>
+  <p><strong>Email:</strong> {{ userData.email }}</p>
+  <p><strong>Telèfon:</strong> {{ userData.phone }}</p>
+  <p><strong>Moneder:</strong> {{ userData.wallet }}</p>
+</div>
