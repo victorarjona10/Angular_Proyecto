@@ -8,3 +8,10 @@
   <p><strong>Telèfon:</strong> {{ userData.phone }}</p>
   <p><strong>Moneder:</strong> {{ userData.wallet }}</p>
 </div>
+
+<div class="table">
+  <app-table 
+    [data]="tableData" 
+    [columns]="tableColumns">
+  </app-table>
+</div>

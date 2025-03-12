@@ -1,0 +1,30 @@
+<table>
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns" (click)="sortData(column.key)">
+          {{ column.label }}
+          <span *ngIf="sortColumn === column.key">
+            {{ sortDirection === 'asc' ? '▲' : '▼' }}
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of paginatedData">
+        <td *ngFor="let column of columns">{{ item[column.key] }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="pagination-controls">
+    <label for="rowsPerPage">Rows per page:</label>
+    <select id="rowsPerPage" (change)="changeRowsPerPage($event)">
+      <option *ngFor="let option of rowsPerPageOptions" [value]="option">{{ option }}</option>
+    </select>
+  
+    <button (click)="changePageToFirst()" [disabled]="currentPage === 1">«</button>
+    <button (click)="changePage(-1)" [disabled]="currentPage === 1">‹</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="changePage(1)" [disabled]="currentPage * rowsPerPage >= data.length">›</button>
+    <button (click)="changePageToLast()" [disabled]="currentPage * rowsPerPage >= data.length">»</button>
+  </div>
