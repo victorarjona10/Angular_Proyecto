@@ -22,9 +22,27 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/users/email/${email}`, { headers });
   }
 
+  getUserById(userId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/users/${userId}`, { headers });
+  }
+  
   getAllUsers(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<any>(`${this.apiUrl}/users`, { headers });
+  }
+
+  inactivateUser(userId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.apiUrl}/users/InactivateFlag/${userId}`, { headers });
+  }
+
+  activateUser(userId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.apiUrl}/users/ActivateFlag/${userId}`, { headers });
   }
 }

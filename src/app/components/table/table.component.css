@@ -70,3 +70,17 @@ button:hover {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container button {
+  margin-bottom: 5px; /* Espacio entre los botones */
+}
+
+.inactive{
+  opacity: 0.5;
+  filter: blur(2px);
+}

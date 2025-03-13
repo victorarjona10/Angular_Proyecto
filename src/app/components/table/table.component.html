@@ -1,30 +1,41 @@
 <table>
-    <thead>
-      <tr>
-        <th *ngFor="let column of columns" (click)="sortData(column.key)">
-          {{ column.label }}
-          <span *ngIf="sortColumn === column.key">
-            {{ sortDirection === 'asc' ? '▲' : '▼' }}
-          </span>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of paginatedData">
-        <td *ngFor="let column of columns">{{ item[column.key] }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <div class="pagination-controls">
-    <label for="rowsPerPage">Rows per page:</label>
-    <select id="rowsPerPage" (change)="changeRowsPerPage($event)">
-      <option *ngFor="let option of rowsPerPageOptions" [value]="option">{{ option }}</option>
-    </select>
-  
-    <button (click)="changePageToFirst()" [disabled]="currentPage === 1">«</button>
-    <button (click)="changePage(-1)" [disabled]="currentPage === 1">‹</button>
-    <span>Page {{ currentPage }} of {{ totalPages }}</span>
-    <button (click)="changePage(1)" [disabled]="currentPage * rowsPerPage >= data.length">›</button>
-    <button (click)="changePageToLast()" [disabled]="currentPage * rowsPerPage >= data.length">»</button>
-  </div>
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns" (click)="sortData(column.key)">
+        {{ column.label }}
+        <span *ngIf="sortColumn === column.key">
+          {{ sortDirection === 'asc' ? '▲' : '▼' }}
+        </span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of paginatedData">
+      <td *ngFor="let column of columns" [ngClass]="{'inactive': ReturnFlag(item) && column.key !== 'flag'}">
+        <ng-container *ngIf="column.key !== 'flag'">
+          {{ item[column.key] }}
+        </ng-container>
+        <ng-container *ngIf="column.key === 'flag'">
+          <div class="button-container">
+            <button (click)="inactivateUser(item)">X</button>
+            <button (click)="activateUser(item)">O</button>
+            <button>Modificar</button>
+          </div>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pagination-controls">
+  <label for="rowsPerPage">Rows per page:</label>
+  <select id="rowsPerPage" (change)="changeRowsPerPage($event)">
+    <option *ngFor="let option of rowsPerPageOptions" [value]="option">{{ option }}</option>
+  </select>
+
+  <button (click)="changePageToFirst()" [disabled]="currentPage === 1">«</button>
+  <button (click)="changePage(-1)" [disabled]="currentPage === 1">‹</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="changePage(1)" [disabled]="currentPage * rowsPerPage >= data.length">›</button>
+  <button (click)="changePageToLast()" [disabled]="currentPage * rowsPerPage >= data.length">»</button>
+</div>

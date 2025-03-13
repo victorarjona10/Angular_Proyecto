@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     { key: 'name', label: 'Name' },
     { key: 'phone', label: 'Phone' },
     { key: 'password', label: 'Password' },
-    { key: 'wallet', label: 'Moneder' },
+    { key: 'wallet', label: 'Wallet' },
     { key: 'flag', label: 'Flag' }
   ];
 

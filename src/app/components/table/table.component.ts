@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-table',
@@ -18,9 +19,11 @@ export class TableComponent {
   }
   private _data: any[] = [];
 
-  @Input() columns: { key: string, label: string }[] = []; // Definición de columnas
+  @Input() columns: { key: string, label: string }[] = []; 
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
+
+  constructor(private apiService: ApiService) {}
 
   currentPage: number = 1;
   rowsPerPage: number = 5;
@@ -99,4 +102,29 @@ export class TableComponent {
     }
     this.currentPage = 1; // Reset to first page
   }
+
+  inactivateUser(item: any) {
+    this.apiService.inactivateUser(item._id).subscribe({
+      next: (data) => {
+        console.log('Usuario inactivado:', data);
+      },
+      error: (err) => {
+        console.error('Error inactivando el usuario', err);
+      }
+  });
+}
+ReturnFlag(item: any): boolean {
+  return item.flag;
+}
+  activateUser(item: any) {
+    this.apiService.activateUser(item._id).subscribe({
+      next: (data) => {
+        console.log('Usuario activado:', data);
+      },
+      error: (err) => {
+        console.error('Error activando el usuario', err);
+      }
+  });
+
+}
 }
