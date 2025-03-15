@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -11,7 +12,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class TableComponent {
   @Input() set data(value: any[]) {
-    this._data = value.map((item, index) => ({ ...item, num: index + 1 }));
+    this._data = value.map((item, index) => ({ ...item, num: index + 1, flag: item.flag ?? false }));
     this.totalPages = Math.ceil(this._data.length / this.rowsPerPage);
   }
   get data() {
@@ -23,7 +24,7 @@ export class TableComponent {
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   currentPage: number = 1;
   rowsPerPage: number = 5;
@@ -107,24 +108,27 @@ export class TableComponent {
     this.apiService.inactivateUser(item._id).subscribe({
       next: (data) => {
         console.log('Usuario inactivado:', data);
+        item.Flag = false;
       },
       error: (err) => {
         console.error('Error inactivando el usuario', err);
       }
   });
 }
-ReturnFlag(item: any): boolean {
-  return item.flag;
-}
   activateUser(item: any) {
     this.apiService.activateUser(item._id).subscribe({
       next: (data) => {
         console.log('Usuario activado:', data);
+        item.Flag = true;
       },
       error: (err) => {
         console.error('Error activando el usuario', err);
       }
   });
 
+}
+
+editUser(item: any) {
+  this.router.navigate(['/edit', item._id]);
 }
 }

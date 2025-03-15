@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { TableComponent } from '../../components/table/table.component';
@@ -23,15 +23,25 @@ export class HomeComponent implements OnInit {
     { key: 'flag', label: 'Flag' }
   ];
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers() {
     this.apiService.getAllUsers().subscribe({
       next: (data) => {
-        this.tableData = data; // Asigna los datos de todos los usuarios a la tabla
+        console.log('Usuarios cargados:', data);
+        this.tableData = data.map((user: any, index: number) => ({
+          num: index + 1,  
+          ...user,
+          flag: user.flag ?? false  
+        }));
+        this.cdRef.detectChanges(); 
       },
       error: (err) => {
-        console.error('Error obtenint les dades dels usuaris', err);
+        console.error('Error obteniendo los datos de los usuarios', err);
       }
     });
   }

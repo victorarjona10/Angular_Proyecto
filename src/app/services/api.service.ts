@@ -45,4 +45,10 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put<any>(`${this.apiUrl}/users/ActivateFlag/${userId}`, { headers });
   }
+
+  updateUser(user: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(`${this.apiUrl}/users/${user._id}`, user, { headers });
+  }
 }

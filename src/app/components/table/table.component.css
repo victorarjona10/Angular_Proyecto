@@ -80,7 +80,13 @@ button:hover {
   margin-bottom: 5px; /* Espacio entre los botones */
 }
 
-.inactive{
-  opacity: 0.5;
-  filter: blur(2px);
+.inactive {
+  opacity: 0.6; 
+  background-color: rgba(255, 255, 255, 0.7);
+  filter: blur(0.5px); 
+  pointer-events: none;
+}
+
+.inactive td {
+  color: rgba(0, 0, 0, 0.5); 
 }

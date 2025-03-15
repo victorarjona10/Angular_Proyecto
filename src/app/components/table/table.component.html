@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of paginatedData">
-      <td *ngFor="let column of columns" [ngClass]="{'inactive': ReturnFlag(item) && column.key !== 'flag'}">
+      <td *ngFor="let column of columns" [ngClass]="{'inactive': !item.Flag && column.key !== 'flag'}">
         <ng-container *ngIf="column.key !== 'flag'">
           {{ item[column.key] }}
         </ng-container>
@@ -19,7 +19,7 @@
           <div class="button-container">
             <button (click)="inactivateUser(item)">X</button>
             <button (click)="activateUser(item)">O</button>
-            <button>Modificar</button>
+            <button (click)="editUser(item)">Modificar</button>
           </div>
         </ng-container>
       </td>
