@@ -131,4 +131,8 @@ export class TableComponent {
 editUser(item: any) {
   this.router.navigate(['/edit', item._id]);
 }
+
+ViewProfile(item: any) {
+  this.router.navigate(['/profile', item._id]);
+}
 }
