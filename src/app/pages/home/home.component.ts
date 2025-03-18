@@ -7,7 +7,7 @@ import { TableComponent } from '../../components/table/table.component';
   selector: 'app-home',
   templateUrl: './home.component.html',
   imports: [CommonModule, TableComponent], // Importa CommonModule aquí
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   userData: any;
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadUsers() {
-    this.apiService.getAllUsers().subscribe({
+    this.apiService.getAllUsers(1,5).subscribe({
       next: (data) => {
         console.log('Usuarios cargados:', data);
         this.tableData = data.map((user: any, index: number) => ({

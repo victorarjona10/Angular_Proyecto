@@ -33,9 +33,9 @@
     <option *ngFor="let option of rowsPerPageOptions" [value]="option">{{ option }}</option>
   </select>
 
-  <button (click)="changePageToFirst()" [disabled]="currentPage === 1">«</button>
-  <button (click)="changePage(-1)" [disabled]="currentPage === 1">‹</button>
-  <span>Page {{ currentPage }} of {{ totalPages }}</span>
-  <button (click)="changePage(1)" [disabled]="currentPage * rowsPerPage >= data.length">›</button>
-  <button (click)="changePageToLast()" [disabled]="currentPage * rowsPerPage >= data.length">»</button>
+  <button (click)="changePageToFirst()" >«</button>
+  <button (click)="changePage(-1)" >‹</button>
+  <span>Page {{ currentPage }}</span>
+  <button (click)="changePage(1)" >›</button>
+  <button (click)="changePageToLast()">»</button>
 </div>

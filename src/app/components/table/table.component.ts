@@ -54,6 +54,25 @@ export class TableComponent {
   });
 }
 
+getUsers(page: number, limit: number) {
+  this.apiService.getAllUsers(page, limit).subscribe({
+    next: (data) => {
+      console.log('Usuarios cargados:', data);
+      const newUsers = data.map((user: any) => ({
+        ...user,
+        flag: user.flag ?? false
+      }));
+      const uniqueUsers = newUsers.filter((newUser: any) => !this._data.some(existingUser => existingUser._id === newUser._id));
+      this._data = [...this._data, ...uniqueUsers];
+      this._data = this._data.map((item, index) => ({ ...item, num: index + 1 })); // Recalculate numbering
+      this.totalPages = Math.ceil(this._data.length / this.rowsPerPage);
+    },
+    error: (err) => {
+      console.error('Error obteniendo los datos de los usuarios', err);
+    }
+  });
+}
+
   get paginatedData() {
     const startIndex = (this.currentPage - 1) * this.rowsPerPage;
     return this.sortedData.slice(startIndex, startIndex + this.rowsPerPage);
@@ -78,11 +97,22 @@ export class TableComponent {
   }
 
   changePage(increment: number) {
+    if(increment === 1 && this.currentPage === this.totalPages)
+    {
+      this.getUsers(this.currentPage + 1, this.rowsPerPage);
+      
+    }
     this.currentPage += increment;
   }
 
   changeRowsPerPage(event: any) {
+
+    if(this.currentPage === this.totalPages)
+    {
+      this.getUsers(this.currentPage , parseInt(event.target.value, 10));
+    }
     this.rowsPerPage = parseInt(event.target.value, 10);
+
     this.currentPage = 1; // Reset to first page
   }
 

@@ -28,10 +28,11 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/users/${userId}`, { headers });
   }
   
-  getAllUsers(): Observable<any> {
+  getAllUsers(page: number, limit: number): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.apiUrl}/users`, { headers });
+    const params = { page: page.toString(), limit: limit.toString() };
+    return this.http.get<any>(`${this.apiUrl}/users`, { headers, params });
   }
 
   inactivateUser(userId: string): Observable<any> {
