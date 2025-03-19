@@ -1,0 +1,14 @@
+.product-details {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 8px;
+}
+
+.product-details h2 {
+  margin-top: 0;
+}
+
+.product-details p {
+  margin: 4px 0;
+}

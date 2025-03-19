@@ -1,0 +1,10 @@
+<div class="order-details">
+  <strong>Order ID:</strong> {{ order._id }} <br>
+  <strong>Products:</strong>
+  <ul class="order-products">
+    <li *ngFor="let product of order.products">
+      <app-product [product]="product"></app-product>
+    </li>
+  </ul>
+  <strong>Date:</strong> {{ order.orderDate | date }}
+</div>

@@ -14,3 +14,21 @@
 h1 {
   margin: 0;
 }
+
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinea los elementos en la parte superior */
+  padding: 20px;
+}
+
+app-filter-search {
+  flex: 1;
+  margin-right: 20px;
+  align-self: stretch; /* Asegura que el buscador esté alineado en la parte superior */
+}
+
+app-table {
+  flex: 2;
+  align-self: stretch; /* Asegura que la tabla esté alineada en la parte superior */
+}

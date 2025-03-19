@@ -1,7 +1,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1rem 0;
+  margin: 0; /* Eliminar margen superior */
   font-size: 1rem;
   text-align: left;
 }
@@ -63,8 +63,8 @@ button:hover {
 }
 
 .pagination-controls span {
-    margin-right: 0.5rem; /* Añadir margen izquierdo al span */
-  }
+  margin-right: 0.5rem; /* Añadir margen izquierdo al span */
+}
 
 .pagination-controls button:disabled {
   background-color: #ccc;

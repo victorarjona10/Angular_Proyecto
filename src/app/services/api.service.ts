@@ -52,4 +52,18 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put<any>(`${this.apiUrl}/users/${user._id}`, user, { headers });
   }
+
+  getOrdersByUserId(userId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/orders/AllOrdersByUser/${userId}`, { headers });
+  }
+
+  createUser(user: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/users`, user);
+  }
+
+  searchUsers(criteria: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/search-users`, criteria);
+  }
 }

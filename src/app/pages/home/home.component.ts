@@ -2,11 +2,12 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { TableComponent } from '../../components/table/table.component';
+import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  imports: [CommonModule, TableComponent], // Importa CommonModule aquí
+  imports: [CommonModule, TableComponent, FilterSearchComponent], // Importa CommonModule aquí
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {

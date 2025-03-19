@@ -12,10 +12,11 @@
   <p><strong>Telèfon:</strong> {{ userData.phone }}</p>
   <p><strong>Moneder:</strong> {{ userData.wallet }}</p>
 </div>
-
-<div class="table">
+<div class="home-container">
   <app-table 
     [data]="tableData" 
     [columns]="tableColumns">
   </app-table>
+  <app-filter-search></app-filter-search>
 </div>
+

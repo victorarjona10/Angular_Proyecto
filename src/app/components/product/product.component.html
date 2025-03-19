@@ -1,0 +1,8 @@
+<div class="product-details" (click)="View()">
+  <h2>{{ product?.product_id.name }}</h2>
+  <p><strong>Description:</strong> {{ product?.product_id.description }}</p>
+  <p><strong>Price:</strong> ${{ product?.product_id.price }}</p>
+  <p><strong>Rating:</strong> {{ product?.product_id.rating }} / 5</p>
+  <p><strong>Quantity:</strong> {{ product?.quantity }}</p>
+  <p><strong>Product ID:</strong> {{ product?.product_id._id }}</p>
+</div>

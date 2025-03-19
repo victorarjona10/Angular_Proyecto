@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateUserComponent } from '../create-user/create-user.component';
 
 @Component({
   selector: 'app-table',
@@ -11,6 +13,17 @@ import { Router } from '@angular/router';
   styleUrl: './table.component.css'
 })
 export class TableComponent {
+
+
+
+  openCreateUserModal() {
+    this.dialog.open(CreateUserComponent, {
+      width: '600px', // Ajusta el ancho del modal
+      height: 'auto', // Ajusta la altura del modal automáticamente
+      panelClass: 'custom-dialog-container' // Clase CSS personalizada para el modal
+    });
+  }
+
   @Input() set data(value: any[]) {
     this._data = value.map((item, index) => ({ ...item, num: index + 1, flag: item.flag ?? false }));
     this.totalPages = Math.ceil(this._data.length / this.rowsPerPage);
@@ -24,7 +37,7 @@ export class TableComponent {
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router, private dialog: MatDialog) {}
 
   currentPage: number = 1;
   rowsPerPage: number = 5;
@@ -165,4 +178,6 @@ editUser(item: any) {
 ViewProfile(item: any) {
   this.router.navigate(['/profile', item._id]);
 }
+
+
 }
