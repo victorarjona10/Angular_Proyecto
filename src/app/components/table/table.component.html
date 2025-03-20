@@ -4,14 +4,18 @@
       <th *ngFor="let column of columns" (click)="sortData(column.key)">
         {{ column.label }}
         <span *ngIf="sortColumn === column.key">
-          {{ sortDirection === 'asc' ? '▲' : '▼' }}
+          {{ sortDirection === "asc" ? "▲" : "▼" }}
         </span>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of paginatedData" (click)="ViewProfile(item)">
-      <td *ngFor="let column of columns" [ngClass]="{'inactive': !item.Flag && column.key !== 'flag'}" (click)="column.key === 'flag' ? $event.stopPropagation() : null">
+      <td
+        *ngFor="let column of columns"
+        [ngClass]="{ inactive: !item.Flag && column.key !== 'flag' }"
+        (click)="column.key === 'flag' ? $event.stopPropagation() : null"
+      >
         <ng-container *ngIf="column.key !== 'flag'">
           {{ item[column.key] }}
         </ng-container>
@@ -30,15 +34,19 @@
 <div class="pagination-controls">
   <label for="rowsPerPage">Rows per page:</label>
   <select id="rowsPerPage" (change)="changeRowsPerPage($event)">
-    <option *ngFor="let option of rowsPerPageOptions" [value]="option">{{ option }}</option>
+    <option *ngFor="let option of rowsPerPageOptions" [value]="option">
+      {{ option }}
+    </option>
   </select>
 
-  <button (click)="changePageToFirst()" >«</button>
-  <button (click)="changePage(-1)" >‹</button>
+  <button (click)="changePageToFirst()">«</button>
+  <button (click)="changePage(-1)" [disabled]="currentPage === 1">‹</button>
   <span>Page {{ currentPage }}</span>
-  <button (click)="changePage(1)" >›</button>
+  <button (click)="changePage(1)">›</button>
   <button (click)="changePageToLast()">»</button>
 </div>
 <div>
-  <button class="create-user-button" (click)="openCreateUserModal()">Crear Usuario</button>
+  <button class="create-user-button" (click)="openCreateUserModal()">
+    Crear Usuario
+  </button>
 </div>
