@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { TableComponent } from '../../components/table/table.component';
 import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
+import { TableSearchComponent } from '../../components/table-search/table-search.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  imports: [CommonModule, TableComponent, FilterSearchComponent], // Importa CommonModule aquí
+  imports: [CommonModule, TableComponent, FilterSearchComponent, TableSearchComponent], // Importa CommonModule aquí
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   userData: any;
   tableData: any[] = []; // Datos para la tabla
+  filteredData: any[] = [];
   tableColumns: { key: string, label: string }[] = [ // Definición de columnas
     { key: 'num', label: 'Num' },
     { key: '_id', label: 'ID' },
@@ -39,12 +41,23 @@ export class HomeComponent implements OnInit {
           ...user,
           flag: user.flag ?? false  
         }));
+        this.filteredData = [...this.tableData];
         this.cdRef.detectChanges(); 
       },
       error: (err) => {
         console.error('Error obteniendo los datos de los usuarios', err);
       }
     });
+  }
+
+  handleSearch(searchData: { field: string; term: string }) {
+    if (!searchData.term) {
+      this.filteredData = [...this.tableData]; // 还原所有数据
+    } else {
+      this.filteredData = this.tableData.filter(user =>
+        user[searchData.field]?.toString().toLowerCase().includes(searchData.term.toLowerCase())
+      );
+    }
   }
 
   onEdit(item: any) {

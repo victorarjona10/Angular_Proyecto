@@ -13,10 +13,17 @@
   <p><strong>Moneder:</strong> {{ userData.wallet }}</p>
 </div>
 <div class="home-container">
-  <app-table 
-    [data]="tableData" 
+  <div class="left-container">
+    <app-table-search 
+    (searchEvent)="handleSearch($event)">
+    </app-table-search>
+
+    <app-table 
+    [data]="filteredData" 
     [columns]="tableColumns">
-  </app-table>
+    </app-table>
+  </div>
+  
   <app-filter-search></app-filter-search>
 </div>
 
