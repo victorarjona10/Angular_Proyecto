@@ -4,17 +4,19 @@ import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { TableFilterPipe } from '../../pipes/table-filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
 export class TableComponent {
 
-
+  searchText: string = ''; // Texto de búsqueda
 
   openCreateUserModal() {
     this.dialog.open(CreateUserComponent, {
@@ -85,12 +87,26 @@ getUsers(page: number, limit: number) {
     }
   });
 }
+onSearchChange() {
+  this.currentPage = 1; // Reinicia a la primera página al cambiar el texto de búsqueda
+}
 
-  get paginatedData() {
-    const startIndex = (this.currentPage - 1) * this.rowsPerPage;
-    return this.sortedData.slice(startIndex, startIndex + this.rowsPerPage);
-  }
-
+      get paginatedData() {
+      // Filtrar los datos primero
+      const filteredData = new TableFilterPipe().transform(this.sortedData, this.searchText, ['name']);
+    
+      // Recalcular el número total de páginas basado en los datos filtrados
+      this.totalPages = Math.ceil(filteredData.length / this.rowsPerPage);
+    
+      // Ajustar la página actual si excede el número total de páginas
+      if (this.currentPage > this.totalPages) {
+        this.currentPage = this.totalPages || 1; // Si no hay resultados, vuelve a la página 1
+      }
+    
+      // Calcular el índice inicial y final para la paginación
+      const startIndex = (this.currentPage - 1) * this.rowsPerPage;
+      return filteredData.slice(startIndex, startIndex + this.rowsPerPage);
+    }
   // get paginatedDataWithIndex() {
   //   const startIndex = (this.currentPage - 1) * this.rowsPerPage;
   //   return this.paginatedData.map((item, index) => ({
