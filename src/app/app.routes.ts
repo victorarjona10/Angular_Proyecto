@@ -7,21 +7,22 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductComponent } from './components/product/product.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { EtiquetaMin1Component } from './components/etiqueta-min1/etiqueta-min1.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'edit/:id', component: EditUserComponent },
-  {path: 'profile/:id', component: ProfileComponent},
+  { path: 'profile/:id', component: ProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'product/:id', component: ProductComponent },
-  { path: 'createuser', component: CreateUserComponent }
-  // Altres rutes...
+  { path: 'createuser', component: CreateUserComponent },
+  { path: 'etiquetas/:id', component: EtiquetaMin1Component }, // Nueva ruta
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
