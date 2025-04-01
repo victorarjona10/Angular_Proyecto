@@ -67,3 +67,9 @@ npm install after git clone
 
 API: https://github.com/victorarjona10/EA_PROYECTO_QUICKFIND npm install to install dependencies & npx ts-node src/app.ts to run the API
 
+
+
+
+id del commit: ab692151d63c3ba05528dd4a613ee1fbcf99d3a8
+
+De la parte de angular he creado el componente, y lo he usado, mostrando los valores de las etiquetas. Lo que me ha faltado es usar todas las peticiones posibles. 
