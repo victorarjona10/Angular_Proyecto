@@ -1,0 +1,14 @@
+<div class="etiqueta-container">
+  <div class="etiqueta-header">
+    <h1 class="etiqueta-name">{{ etiqueta.name }}</h1>
+  </div>
+  <div class="etiqueta-body">
+    <h2>Etiqueta Information</h2>
+    <ul class="etiqueta-details">
+      <li><strong>ID:</strong> {{ etiqueta._id }}</li>
+      <li><strong>Descripción:</strong> {{ etiqueta.description }}</li>
+      <li><strong>Creado el:</strong> {{ etiqueta.createdAt }}</li>
+    </ul>
+    <button (click)="goBack()">Volver</button>
+  </div>
+</div>

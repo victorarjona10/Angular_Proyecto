@@ -9,8 +9,8 @@ import { MatDialogRef } from '@angular/material/dialog';
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css'],
-  imports: [ReactiveFormsModule]
-}) 
+  imports: [ReactiveFormsModule],
+})
 export class CreateUserComponent {
   createUserForm: FormGroup;
 
@@ -25,7 +25,7 @@ export class CreateUserComponent {
       password: ['', Validators.required],
       phone: ['', Validators.required],
       wallet: ['', Validators.required],
-      Flag: [false]
+      Flag: [false],
     });
   }
 
@@ -38,12 +38,11 @@ export class CreateUserComponent {
         },
         error: (err) => {
           console.error('Error creando el usuario', err);
-        }
+        },
       });
     }
   }
   onCancel() {
     this.dialogRef.close();
   }
-
 }

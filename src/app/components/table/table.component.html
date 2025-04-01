@@ -1,60 +1,66 @@
-<input 
-  type="text" 
-  placeholder="Buscar..." 
-  [(ngModel)]="searchText" 
-  (ngModelChange)="onSearchChange()" 
-  class="search-input"
-/>
+<div class="table-container">
+  <!-- Tabla -->
+  <div class="table-section">
+    <input
+      type="text"
+      placeholder="Buscar..."
+      [(ngModel)]="searchText"
+      (ngModelChange)="onSearchChange()"
+      class="search-input"
+    />
 
-<table>
-  <thead>
-    <tr>
-      <th *ngFor="let column of columns" (click)="sortData(column.key)">
-        {{ column.label }}
-        <span *ngIf="sortColumn === column.key">
-          {{ sortDirection === "asc" ? "▲" : "▼" }}
-        </span>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of paginatedData" (click)="ViewProfile(item)">
-      <td
-        *ngFor="let column of columns"
-        [ngClass]="{ inactive: !item.Flag && column.key !== 'flag' }"
-        (click)="column.key === 'flag' ? $event.stopPropagation() : null"
-      >
-        <ng-container *ngIf="column.key !== 'flag'">
-          {{ item[column.key] }}
-        </ng-container>
-        <ng-container *ngIf="column.key === 'flag'">
-          <div class="button-container">
-            <button (click)="inactivateUser(item)">X</button>
-            <button (click)="activateUser(item)">O</button>
-            <button (click)="editUser(item)">Modificar</button>
-          </div>
-        </ng-container>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns" (click)="sortData(column.key)">
+            {{ column.label }}
+            <span *ngIf="sortColumn === column.key">
+              {{ sortDirection === "asc" ? "▲" : "▼" }}
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of paginatedData"
+          (mouseover)="selectEtiqueta(item)"
+        >
+          <td
+            *ngFor="let column of columns"
+            [ngClass]="{ inactive: !item.Flag && column.key !== 'flag' }"
+          >
+            <ng-container *ngIf="column.key !== 'flag'">
+              {{ item[column.key] }}
+            </ng-container>
+            <ng-container *ngIf="column.key === 'flag'">
+              <div class="button-container">
+                <button
+                  (click)="inactivateUser(item); $event.stopPropagation()"
+                >
+                  X
+                </button>
+                <button (click)="activateUser(item); $event.stopPropagation()">
+                  O
+                </button>
+                <button (click)="editUser(item); $event.stopPropagation()">
+                  Modificar
+                </button>
+              </div>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-<div class="pagination-controls">
-  <label for="rowsPerPage">Rows per page:</label>
-  <select id="rowsPerPage" (change)="changeRowsPerPage($event)">
-    <option *ngFor="let option of rowsPerPageOptions" [value]="option">
-      {{ option }}
-    </option>
-  </select>
-
-  <button (click)="changePageToFirst()">«</button>
-  <button (click)="changePage(-1)" [disabled]="currentPage === 1">‹</button>
-  <span>Page {{ currentPage }}</span>
-  <button (click)="changePage(1)">›</button>
-  <button (click)="changePageToLast()">»</button>
-</div>
-<div>
-  <button class="create-user-button" (click)="openCreateUserModal()">
-    Crear Usuario
-  </button>
+  <!-- Información de la etiqueta -->
+  <div class="details-section" *ngIf="selectedEtiqueta">
+    <h2>Detalles de la Etiqueta</h2>
+    <ul>
+      <li><strong>ID:</strong> {{ selectedEtiqueta._id }}</li>
+      <li><strong>Nombre:</strong> {{ selectedEtiqueta.name }}</li>
+      <li><strong>Descripción:</strong> {{ selectedEtiqueta.description }}</li>
+      <li><strong>Creado el:</strong> {{ selectedEtiqueta.createdAt }}</li>
+    </ul>
+  </div>
 </div>
