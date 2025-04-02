@@ -8,7 +8,7 @@ import { TableSearchComponent } from '../../components/table-search/table-search
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  imports: [CommonModule, TableComponent/*, FilterSearchComponent , TableSearchComponent*/], // Importa CommonModule aquí
+  imports: [CommonModule, TableComponent , TableSearchComponent, FilterSearchComponent],
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {

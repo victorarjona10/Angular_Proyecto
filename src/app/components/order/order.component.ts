@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ProductComponent } from '../product/product.component';
 import { CommonModule } from '@angular/common';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-order',
@@ -9,6 +10,9 @@ import { CommonModule } from '@angular/common';
   imports: [ProductComponent, CommonModule],
   standalone: true 
 })
-export class OrderComponent {
+export class OrderComponent implements OnInit {
+  ngOnInit(): void {
+    console.log('OrderComponent initialized with order:', this.order);
+  }
   @Input() order: any;
 }

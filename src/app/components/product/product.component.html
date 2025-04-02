@@ -1,8 +1,12 @@
-<div class="product-details" (click)="View()">
-  <h2>{{ product?.product_id.name }}</h2>
-  <p><strong>Description:</strong> {{ product?.product_id.description }}</p>
-  <p><strong>Price:</strong> ${{ product?.product_id.price }}</p>
-  <p><strong>Rating:</strong> {{ product?.product_id.rating }} / 5</p>
-  <p><strong>Quantity:</strong> {{ product?.quantity }}</p>
-  <p><strong>Product ID:</strong> {{ product?.product_id._id }}</p>
+<div *ngIf="product?.product_id; else noProduct" class="product-details" (click)="View()">
+  <h2>{{ product?.product_id.name ? product?.product_id.name : 'No tiene nombre' }}</h2>
+  <p><strong>Description:</strong> {{ product?.product_id.description ? product?.product_id.description : 'No tiene descripción' }}</p>
+  <p><strong>Price:</strong> {{ product?.product_id.price ? '$' + product?.product_id.price : 'No tiene precio' }}</p>
+  <p><strong>Rating:</strong> {{ product?.product_id.rating ? product?.product_id.rating + ' / 5' : 'No tiene calificación' }}</p>
+  <p><strong>Quantity:</strong> {{ product?.product_id.quantity ? product?.product_id.quantity : 'No tiene cantidad' }}</p>
+  <p><strong>Product ID:</strong> {{ product?.product_id._id ? product?.product_id._id : 'No tiene ID' }}</p>
 </div>
+
+<ng-template #noProduct>
+  <p>No existe el producto</p>
+</ng-template>
