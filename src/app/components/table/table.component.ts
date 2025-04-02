@@ -7,7 +7,7 @@ import { CreateUserComponent } from '../create-user/create-user.component';
 import { TableFilterPipe } from '../../pipes/table-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user'; 
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-table',
   standalone: true,
@@ -42,7 +42,7 @@ export class TableComponent {
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
 
-  constructor(private apiService: ApiService, private router: Router, private dialog: MatDialog) {}
+  constructor(private apiService: ApiService, private router: Router, private dialog: MatDialog, private cdr: ChangeDetectorRef) {}
 
   currentPage: number = 1;
   rowsPerPage: number = 5;
@@ -50,7 +50,7 @@ export class TableComponent {
   sortColumn: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   totalPages: number = 0;
-
+ 
   get sortedData() {
   if (!this.sortColumn || this.sortColumn === 'num') {
     return this.data;
@@ -78,7 +78,7 @@ getUsers(page: number, limit: number) {
       console.log('Usuarios cargados:', data);
       const newUsers = data.map((user: User) => ({
         ...user,
-        flag: user.flag ?? false
+        flag: user.Flag ?? false
       }));
       const uniqueUsers = newUsers.filter((newUser: User) => !this._data.some(existingUser => existingUser._id === newUser._id));
       this._data = [...this._data, ...uniqueUsers];
@@ -170,7 +170,8 @@ onSearchChange() {
     this.apiService.inactivateUser(item._id).subscribe({
       next: (data) => {
         console.log('Usuario inactivado:', data);
-        item.flag = false;
+        item.Flag = false;
+        this.cdr.detectChanges(); 
       },
       error: (err) => {
         console.error('Error inactivando el usuario', err);
@@ -181,7 +182,8 @@ onSearchChange() {
     this.apiService.activateUser(item._id).subscribe({
       next: (data) => {
         console.log('Usuario activado:', data);
-        item.flag = true;
+        item.Flag = true;
+        this.cdr.detectChanges(); 
       },
       error: (err) => {
         console.error('Error activando el usuario', err);
@@ -196,6 +198,15 @@ editUser(item: User) {
 
 ViewProfile(item: User) {
   this.router.navigate(['/profile', item._id]);
+}
+copyToClipboard(value: string, event: MouseEvent) {
+  event.stopPropagation(); // Evita que se active el evento de clic en la fila
+  navigator.clipboard.writeText(value).then(() => {
+    console.log(`Valor copiado al portapapeles: ${value}`);
+    alert('ID copiado al portapapeles');
+  }).catch(err => {
+    console.error('Error al copiar al portapapeles:', err);
+  });
 }
 
 

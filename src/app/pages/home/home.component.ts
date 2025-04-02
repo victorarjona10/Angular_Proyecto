@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
         this.tableData = data.map((user: User, index: number) => ({
           num: index + 1,  
           ...user,
-          flag: user.flag ?? false  
+          flag: user.Flag ?? false  
         }));
         this.filteredData = [...this.tableData];
         this.cdRef.detectChanges(); 
@@ -67,5 +67,13 @@ export class HomeComponent implements OnInit {
 
   onDelete(item: any) {
     console.log('Eliminar:', item);
+  }
+
+  handleSearchResults(data: User[]) {
+    console.log('Resultados de búsqueda recibidos:', data);
+    this.filteredData = data.map((user, index) => ({
+      num: index + 1,
+      ...user
+    })); // Actualizar los datos filtrados para la tabla
   }
 }

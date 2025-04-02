@@ -13,6 +13,9 @@
     <label for="wallet">Wallet</label>
     <input type="text" id="wallet" [(ngModel)]="user.wallet" name="wallet" required />
 
+    <label for="avatar">Foto de Perfil (URL)</label>
+    <input type="text" id="avatar" [(ngModel)]="user.avatar" name="avatar" placeholder="https://example.com/avatar.jpg" />
+    
     <button type="button" (click)="updateUser()">Guardar Cambios</button>
     <button type="button" (click)="goBack()">Cancelar</button>
   </form>

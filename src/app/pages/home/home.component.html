@@ -19,11 +19,13 @@
     </app-table-search>  -->
 
     <app-table 
+    #tableRef
     [data]="filteredData" 
     [columns]="tableColumns">
     </app-table>
   </div>
   
-  <app-filter-search></app-filter-search>
+  <app-filter-search (searchResults)="handleSearchResults($event)" [page]="tableRef.currentPage" 
+  [limit]="tableRef.rowsPerPage" ></app-filter-search>
 </div>
 

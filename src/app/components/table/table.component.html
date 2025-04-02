@@ -25,22 +25,32 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of paginatedData" (click)="ViewProfile(item)">
-      <td
-        *ngFor="let column of columns"
-        [ngClass]="{ inactive: !item.Flag && column.key !== 'flag' }"
-        (click)="column.key === 'flag' ? $event.stopPropagation() : null"
-      >
-        <ng-container *ngIf="column.key !== 'flag'">
+    <tr *ngFor="let item of paginatedData"  (click)="ViewProfile(item)">
+      <tr *ngFor="let item of paginatedData" (click)="ViewProfile(item)">
+        <td *ngFor="let column of columns" [ngClass]="{'inactive': !item.Flag && column.key !== 'flag'}" (click)="column.key === 'flag' ? $event.stopPropagation() : null">
+          <!-- <ng-container *ngIf="column.key !== 'flag'">
+            {{ item[column.key] }}
+        </ng-container> -->
+                  
+        <ng-container *ngIf="column.key === '_id' || column.key == 'email' || column.key == 'name' || column.key == 'phone' ; else defaultColumn">
           {{ item[column.key] }}
+          <button class="copy-button" (click)="copyToClipboard(item[column.key], $event)">📋</button>
         </ng-container>
-        <ng-container *ngIf="column.key === 'flag'">
-          <div class="button-container">
-            <button (click)="inactivateUser(item)">X</button>
-            <button (click)="activateUser(item)">O</button>
-            <button (click)="editUser(item)">Modificar</button>
-          </div>
-        </ng-container>
+        <ng-template #defaultColumn>
+          <ng-container *ngIf="column.key === 'flag'; else defaulttColumn">
+            <div class="button-container">
+              <button (click)="inactivateUser(item)">X</button>
+              <button (click)="activateUser(item)">O</button>
+              <button (click)="editUser(item)">Modificar</button>
+            </div>
+          </ng-container>
+          </ng-template>
+
+        <ng-template #defaulttColumn>
+          
+          {{ item[column.key] }}
+        </ng-template>
+        
       </td>
     </tr>
   </tbody>

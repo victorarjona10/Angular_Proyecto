@@ -5,7 +5,7 @@ export class User {
   password: string;
   phone: string;
   wallet: number;
-  flag: boolean;
+  Flag: boolean;
   description?: string;
   avatar?: string;
 
@@ -16,7 +16,7 @@ export class User {
     password: string = '',
     phone: string = '',
     wallet: number = 0,
-    flag: boolean = true,
+    Flag: boolean = true,
     description?: string,
     avatar?: string
   ) {
@@ -26,7 +26,7 @@ export class User {
     this.password = password;
     this.phone = phone;
     this.wallet = wallet;
-    this.flag = flag;
+    this.Flag = Flag;
     this.description = description;
     this.avatar = avatar;
   }

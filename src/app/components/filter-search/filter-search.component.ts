@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-filter-search',
@@ -11,7 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class FilterSearchComponent {
   searchForm: FormGroup;
-
+  @Output() searchResults = new EventEmitter<User[]>();
   constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.searchForm = this.fb.group({
       id: [''],
@@ -20,17 +21,45 @@ export class FilterSearchComponent {
       phone: ['']
     });
   }
+  @Input() page: number = 1; 
+  @Input() limit: number = 5; 
 
   onSearch() {
-    const searchCriteria = this.searchForm.value;
-    this.apiService.searchUsers(searchCriteria).subscribe({
+    const user: User = new User();
+    user.name = this.searchForm.value.name;
+    user.email = this.searchForm.value.email;
+    user.phone = this.searchForm.value.phone;
+    console.log("Usuario:", user);
+
+
+    const queryParams = {
+      name: this.searchForm.value.name,
+      email: this.searchForm.value.email,
+      phone: this.searchForm.value.phone,
+
+  };
+  
+  const cleanedParams = this.cleanQueryParams(queryParams);
+  
+    this.apiService.getUsersByFiltration(cleanedParams, this.page, this.limit).subscribe({
       next: (data) => {
         console.log('Usuarios encontrados:', data);
-        // Manejar los datos de los usuarios encontrados
+        this.searchResults.emit(data);
       },
       error: (err) => {
         console.error('Error buscando usuarios', err);
       }
     });
   }
+
+  resetFilters() {
+    this.searchForm.reset(); // Restablece todos los valores del formulario
+    this.searchResults.emit([]); // Opcional: Emitir un arreglo vacío para limpiar la tabla
+  }
+
+  cleanQueryParams(params: Record<string, any>): Record<string, any> {
+    return Object.fromEntries(
+        Object.entries(params).filter(([_, value]) => value !== undefined && value !== null && value !== '')
+    );
+}
 }

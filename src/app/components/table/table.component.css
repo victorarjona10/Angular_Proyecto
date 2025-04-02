@@ -80,8 +80,9 @@ button:hover {
   margin-bottom: 5px; /* Espacio entre los botones */
 }
 
+/* Estilo para filas inactivas (flag = false) */
 .inactive {
-  background-color: rgba(255, 0, 0, 0.558);
+  background-color: rgba(255, 0, 0, 0.558); /* Color rojo claro para usuarios inactivos */
 }
 
 .search-container {
@@ -98,4 +99,19 @@ button:hover {
 
 .search-select {
   padding: 5px;
+}
+
+.copy-button {
+  margin-left: 5px;
+  padding: 2px 5px;
+  font-size: 12px;
+  background-color: #c6e1ff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
 }
