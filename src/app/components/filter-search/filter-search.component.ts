@@ -17,9 +17,7 @@ export class FilterSearchComponent {
       id: [''],
       name: [''],
       email: [''],
-      phone: [''],
-      wallet: [''],
-      flag: ['']
+      phone: ['']
     });
   }
 

@@ -6,6 +6,11 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ProductComponent } from '../product/product.component';
 import { OrderComponent } from '../order/order.component';
+import { User } from '../../models/user';
+import { Order } from '../../models/order'; // Importa el modelo Order
+import { CreateOrderComponent } from '../create-order/create-order.component';
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-profile',
@@ -15,10 +20,11 @@ import { OrderComponent } from '../order/order.component';
 })
 export class ProfileComponent implements OnInit{
 
-  user: any = {};
-  orders: any = [];
+  user: User = new User();
 
-    constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {}
+  orders: Order[] = [];
+
+    constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {}
   
     ngOnInit(): void {
       this.loadUser();
@@ -61,5 +67,21 @@ export class ProfileComponent implements OnInit{
 
     ViewProduct(item: any) {
       this.router.navigate(['/product', item._id]);
+    }
+
+    openCreateOrderModal() {
+      const dialogRef = this.dialog.open(CreateOrderComponent, {
+        width: '600px',
+        height: 'auto',
+        panelClass: 'custom-dialog-container',
+        data: { user_id: this.user._id }
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          console.log('Orden creada:', result);
+          // Aquí puedes manejar la lógica para guardar la orden en tu backend
+        }
+      });
     }
 }

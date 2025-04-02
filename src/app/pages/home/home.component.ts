@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { TableComponent } from '../../components/table/table.component';
 import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
 import { TableSearchComponent } from '../../components/table-search/table-search.component';
+import { User } from '../../models/user'; 
 
 @Component({
   selector: 'app-home',
@@ -12,9 +13,9 @@ import { TableSearchComponent } from '../../components/table-search/table-search
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  userData: any;
-  tableData: any[] = []; // Datos para la tabla
-  filteredData: any[] = [];
+  userData!: User;
+  tableData: User[] = []; // Datos para la tabla
+  filteredData: User[] = [];
   tableColumns: { key: string, label: string }[] = [ // Definición de columnas
     { key: 'num', label: 'Num' },
     { key: '_id', label: 'ID' },
@@ -30,13 +31,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUsers();
-  }
+  } 
 
   loadUsers() {
     this.apiService.getAllUsers(1,5).subscribe({
       next: (data) => {
         console.log('Usuarios cargados:', data);
-        this.tableData = data.map((user: any, index: number) => ({
+        this.tableData = data.map((user: User, index: number) => ({
           num: index + 1,  
           ...user,
           flag: user.flag ?? false  
@@ -50,15 +51,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  handleSearch(searchData: { field: string; term: string }) {
-    if (!searchData.term) {
-      this.filteredData = [...this.tableData]; // 还原所有数据
-    } else {
-      this.filteredData = this.tableData.filter(user =>
-        user[searchData.field]?.toString().toLowerCase().includes(searchData.term.toLowerCase())
-      );
-    }
-  }
+  // handleSearch(searchData: { field: string; term: string }) {
+  //   if (!searchData.term) {
+  //     this.filteredData = [...this.tableData]; // 还原所有数据
+  //   } else {
+  //     this.filteredData = this.tableData.filter(user =>
+  //       user[searchData.field]?.toString().toLowerCase().includes(searchData.term.toLowerCase())
+  //     );
+  //   }
+  // }
 
   onEdit(item: any) {
     console.log('Editar:', item);

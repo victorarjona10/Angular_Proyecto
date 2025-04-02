@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { TableFilterPipe } from '../../pipes/table-filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { User } from '../../models/user'; 
 
 @Component({
   selector: 'app-table',
@@ -35,7 +36,7 @@ export class TableComponent {
   get data() {
     return this._data;
   }
-  private _data: any[] = [];
+  private _data: User[] = [];
 
   @Input() columns: { key: string, label: string }[] = []; 
   @Output() edit = new EventEmitter<any>();
@@ -75,11 +76,11 @@ getUsers(page: number, limit: number) {
   this.apiService.getAllUsers(page, limit).subscribe({
     next: (data) => {
       console.log('Usuarios cargados:', data);
-      const newUsers = data.map((user: any) => ({
+      const newUsers = data.map((user: User) => ({
         ...user,
         flag: user.flag ?? false
       }));
-      const uniqueUsers = newUsers.filter((newUser: any) => !this._data.some(existingUser => existingUser._id === newUser._id));
+      const uniqueUsers = newUsers.filter((newUser: User) => !this._data.some(existingUser => existingUser._id === newUser._id));
       this._data = [...this._data, ...uniqueUsers];
       this._data = this._data.map((item, index) => ({ ...item, num: index + 1 })); // Recalculate numbering
       this.totalPages = Math.ceil(this._data.length / this.rowsPerPage);
@@ -165,22 +166,22 @@ onSearchChange() {
     this.currentPage = 1; // Reset to first page
   }
 
-  inactivateUser(item: any) {
+  inactivateUser(item: User) {
     this.apiService.inactivateUser(item._id).subscribe({
       next: (data) => {
         console.log('Usuario inactivado:', data);
-        item.Flag = false;
+        item.flag = false;
       },
       error: (err) => {
         console.error('Error inactivando el usuario', err);
       }
   });
 }
-  activateUser(item: any) {
+  activateUser(item: User) {
     this.apiService.activateUser(item._id).subscribe({
       next: (data) => {
         console.log('Usuario activado:', data);
-        item.Flag = true;
+        item.flag = true;
       },
       error: (err) => {
         console.error('Error activando el usuario', err);
@@ -189,11 +190,11 @@ onSearchChange() {
 
 }
 
-editUser(item: any) {
+editUser(item: User) {
   this.router.navigate(['/edit', item._id]);
 }
 
-ViewProfile(item: any) {
+ViewProfile(item: User) {
   this.router.navigate(['/profile', item._id]);
 }
 

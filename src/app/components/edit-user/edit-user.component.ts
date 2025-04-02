@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-
+import { User } from '../../models/user';
 @Component({
   selector: 'app-edit-user',
   imports: [ FormsModule],
@@ -10,7 +10,7 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
-  user: any = {};
+  user!: User;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
