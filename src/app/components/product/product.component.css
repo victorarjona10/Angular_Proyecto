@@ -12,3 +12,40 @@
 .product-details p {
   margin: 4px 0;
 }
+
+.button-container {
+  display: flex;
+  gap: 10px; /* Espaciado entre los botones */
+  margin-top: 10px;
+}
+
+.quantity-button {
+  color: white;
+  border: none;
+  border-radius: 8px; 
+  padding: 10px 15px; 
+  font-size: 16px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+  width: 40px;
+}
+
+.quantity-button:hover {
+  transform: scale(1.1);
+}
+
+.quantity-button.add {
+  background-color: #28a745; 
+}
+
+.quantity-button.add:hover {
+  background-color: #218838; 
+}
+
+.quantity-button.subtract {
+  background-color: #dc3545; /* Rojo */
+}
+
+.quantity-button.subtract:hover {
+  background-color: #c82333; 
+}

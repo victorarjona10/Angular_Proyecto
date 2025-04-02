@@ -74,6 +74,7 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/orders`, order, { headers });
   }
 
+
   getUsersByFiltration(user: any, page: number, limit: number): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -83,4 +84,25 @@ export class ApiService {
 
     return this.http.get<any>(`${this.apiUrl}/users/usersByFiltration`, { headers, params });
 }
+
+  updateOrderQuantity(orderId: string, productId: string, quantityValue: number): Observable<any> {
+    const body = {
+      products: [
+        {
+          product_id: productId,  
+          quantity: quantityValue  
+        }
+      ]
+    };
+    return this.http.put<any>(`${this.apiUrl}/orders/${orderId}`, body);
+  }
+
+  deleteOrderById(orderId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/orders/${orderId}`);
+  }
+
+  deleteProductFromOrderById(orderId:string, productId: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/orders/${orderId}/${productId}`, '');
+  }
+
 }
