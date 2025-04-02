@@ -83,9 +83,19 @@ button:hover {
 .inactive {
   background-color: rgba(255, 0, 0, 0.558);
 }
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
 .search-input {
-  margin-bottom: 10px;
+  flex: 1;
   padding: 5px;
-  width: 100%;
-  box-sizing: border-box;
+}
+
+.search-select {
+  padding: 5px;
 }

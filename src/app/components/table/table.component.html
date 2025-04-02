@@ -1,10 +1,17 @@
-<input 
-  type="text" 
-  placeholder="Buscar..." 
-  [(ngModel)]="searchText" 
-  (ngModelChange)="onSearchChange()" 
-  class="search-input"
-/>
+<div class="search-container">
+  <input 
+    type="text" 
+    placeholder="Buscar..." 
+    [(ngModel)]="searchText" 
+    (ngModelChange)="onSearchChange()" 
+    class="search-input"
+  />
+  <select [(ngModel)]="searchKey" class="search-select">
+    <option value="name">Nombre</option>
+    <option value="phone">Teléfono</option>
+    <option value="email">Email</option>
+  </select>
+</div>
 
 <table>
   <thead>

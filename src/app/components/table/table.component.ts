@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 export class TableComponent {
 
   searchText: string = ''; // Texto de búsqueda
+  searchKey: string = 'name'; // Clave seleccionada para buscar (por defecto: 'name')
+
 
   openCreateUserModal() {
     this.dialog.open(CreateUserComponent, {
@@ -93,7 +95,7 @@ onSearchChange() {
 
       get paginatedData() {
       // Filtrar los datos primero
-      const filteredData = new TableFilterPipe().transform(this.sortedData, this.searchText, ['name']);
+      const filteredData = new TableFilterPipe().transform(this.sortedData, this.searchText, [this.searchKey]);
     
       // Recalcular el número total de páginas basado en los datos filtrados
       this.totalPages = Math.ceil(filteredData.length / this.rowsPerPage);
