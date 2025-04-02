@@ -5,6 +5,11 @@
   <p><strong>Rating:</strong> {{ product?.product_id.rating ? product?.product_id.rating + ' / 5' : 'No tiene calificación' }}</p>
   <p><strong>Quantity:</strong> {{ product?.quantity ? product?.quantity : 'No tiene cantidad' }}</p>
   <p><strong>Product ID:</strong> {{ product?.product_id._id ? product?.product_id._id : 'No tiene ID' }}</p>
+
+  <div class="button-container">
+    <button class="quantity-button add" (click)="addQuantity()">+</button>
+    <button class="quantity-button subtract" (click)="lessQuantity()">-</button>
+  </div>
 </div>
 
 <ng-template #noProduct>

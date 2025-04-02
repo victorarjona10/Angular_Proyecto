@@ -72,4 +72,24 @@ export class ApiService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<any>(`${this.apiUrl}/orders`, order, { headers });
   }
+
+  updateOrderQuantity(orderId: string, productId: string, quantityValue: number): Observable<any> {
+    const body = {
+      products: [
+        {
+          product_id: productId,  
+          quantity: quantityValue  
+        }
+      ]
+    };
+    return this.http.put<any>(`${this.apiUrl}/orders/${orderId}`, body);
+  }
+
+  deleteOrderById(orderId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/orders/${orderId}`);
+  }
+
+  deleteProductFromOrderById(orderId:string, productId: string): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/orders/${orderId}/${productId}`, '');
+  }
 }

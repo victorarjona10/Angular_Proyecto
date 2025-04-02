@@ -45,6 +45,7 @@ export class CreateOrderComponent {
       status: 'Pendiente' // Si `status` es requerido
     };
       console.log('Orden creada:', newOrder);
+    if (newOrder.products.length !== 0) {
     this.apiService.createOrder(newOrder).subscribe({
       next: (response) => {
         console.log('Orden creada exitosamente:', response);
@@ -55,7 +56,7 @@ export class CreateOrderComponent {
       }
     });
   }
-
+}
   close() {
     this.dialogRef.close();
   }
