@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = 'http://localhost:4000/api/users'; // Canvia per la URL de la teva API
+  apiUrl = 'http://localhost:4000/api/users'; 
 
   constructor(private http: HttpClient) { }
 

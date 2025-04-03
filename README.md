@@ -57,3 +57,13 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+## Additional things
+
+ng serve to start
+
+npm install after git clone
+
+API: https://github.com/victorarjona10/EA_PROYECTO_QUICKFIND npm install to install dependencies & npx ts-node src/app.ts to run the API
+

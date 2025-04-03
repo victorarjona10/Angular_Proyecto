@@ -1,22 +1,23 @@
-<div>
-    <h2>Registre</h2>
+<div class = "signup-container">
+    <h2 class="tuclase">Registre</h2>
     <form (ngSubmit)="signup()">
-      <label for="name">Nom:</label>
-      <input type="text" id="name" [(ngModel)]="name" name="name" required>
-      
-      <label for="email">Email:</label>
-      <input type="email" id="email" [(ngModel)]="email" name="email" required>
-      
-      <label for="password">Contrasenya:</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
-      
-      <label for="phone">Telèfon:</label>
-      <input type="text" id="phone" [(ngModel)]="phone" name="phone">
-      
-      <label for="wallet">Wallet:</label>
-      <input type="number" id="wallet" [(ngModel)]="wallet" name="wallet">
+    <div class="input-container">
+      <input type="text" placeholder="Name" id="name" [(ngModel)]="name" name="name" required>
+    </div>
+    <div class="input-container">
+      <input type="email" placeholder="Email" id="email" [(ngModel)]="email" name="email" required>
+    </div>
+    <div class="input-container">
+      <input type="password" placeholder="Password" id="password" [(ngModel)]="password" name="password" required>
+    </div>
+    <div class="input-container">
+      <input type="text" id="phone" placeholder="Phone" [(ngModel)]="phone" name="phone">
+    </div>
+    <div class="input-container">
+      <input type="number" id="wallet" placeholder="Wallet" [(ngModel)]="wallet" name="wallet">
+    </div>
       
       <button type="submit">Registrar-se</button>
-      <button type="button" (click)="returnToLogin()">returnToLogin</button>
+      <p style="color: blue; text-decoration: underline; cursor: pointer;" (click)="returnToLogin()">Login</p>
     </form>
   </div>

@@ -1,0 +1,38 @@
+
+<div class="profile-container">
+  <div class="profile-header">
+    <img class="profile-avatar" [src]="user.avatar || 'assets/default-avatar.png'" alt="User Avatar" />
+    <h1 class="profile-name">{{ user.name || 'Usuario sin nombre' }}</h1>
+    <p class="profile-role">{{ user._id }}</p>
+  </div>
+
+  <div class="profile-body">
+    <div class="profile-section">
+      <h2>Información del Usuario</h2>
+      <ul class="profile-contact">
+        <li><strong>Email:</strong> {{ user.email || 'No especificado' }}</li>
+        <li><strong>Teléfono:</strong> {{ user.phone || 'No especificado' }}</li>
+        <li><strong>Billetera:</strong> {{ user.wallet || 'No especificado' }}</li>
+        <li><strong>Descripción:</strong> {{ user.description || 'No especificado' }}</li>
+      </ul>
+    </div>
+
+      <div class="profile-section">
+      <h2>Órdenes del Usuario</h2>
+      <ul class="profile-orders" *ngIf="orders && orders.length > 0; else noOrders">
+        <li *ngFor="let order of orders">
+          <app-order [order]="order"></app-order>
+        </li>
+      </ul>
+      <ng-template #noOrders>
+        <p>No hay órdenes disponibles para este usuario.</p>
+      </ng-template>
+    </div>
+    <button class="exit-button" (click)="Return()">Salir</button>
+    <div>
+      <button class="create-order-button" (click)="openCreateOrderModal()">
+        Añadir Orden
+      </button>
+    </div>
+  </div>
+</div>

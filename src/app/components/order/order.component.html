@@ -1,0 +1,16 @@
+<div class="order-details">
+  <div class="order-header">
+    <div>
+      <strong>Order ID:</strong> {{ order._id }}
+    </div>
+    <button class="btn btn-danger" (click)="DeleteOrder(order._id)">Delete Order</button>
+  </div>
+  <br>
+  <strong>Products:</strong>
+  <ul class="order-products">
+    <li *ngFor="let product of order.products">
+      <app-product [product]="product" [order]="order"></app-product>
+    </li>
+  </ul>
+  <strong>Date:</strong> {{ order.orderDate | date }}
+</div>
