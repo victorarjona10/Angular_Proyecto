@@ -11,6 +11,7 @@ import { User } from '../../models/user';
   imports: [ReactiveFormsModule]
 })
 export class FilterSearchComponent {
+  isFormVisible: boolean = false;
   searchForm: FormGroup;
   @Output() searchResults = new EventEmitter<User[]>();
   constructor(private fb: FormBuilder, private apiService: ApiService) {
@@ -61,5 +62,9 @@ export class FilterSearchComponent {
     return Object.fromEntries(
         Object.entries(params).filter(([_, value]) => value !== undefined && value !== null && value !== '')
     );
+}
+
+toggleForm() {
+  this.isFormVisible = !this.isFormVisible; // Alterna el estado del formulario
 }
 }

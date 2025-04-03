@@ -105,4 +105,12 @@ export class ApiService {
     return this.http.put<any>(`${this.apiUrl}/orders/${orderId}/${productId}`, '');
   }
 
+  Login(email: string, password: string): Observable<any> {
+    const body = { 
+      email: email,
+      password: password };
+    return this.http.post<any>(`${this.apiUrl}/admins/login`, body);
+  }
+
+
 }

@@ -79,8 +79,7 @@ export class ProfileComponent implements OnInit{
   
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          console.log('Orden creada:', result);
-          // Aquí puedes manejar la lógica para guardar la orden en tu backend
+          console.log('Orden creada:', result)
         }
       });
     }

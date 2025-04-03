@@ -49,7 +49,8 @@ export class CreateOrderComponent {
     this.apiService.createOrder(newOrder).subscribe({
       next: (response) => {
         console.log('Orden creada exitosamente:', response);
-        this.dialogRef.close(newOrder); // Cerrar el diálogo y devolver la orden creada
+        this.dialogRef.close(newOrder); 
+        window.location.reload();
       },
       error: (err) => {
         console.error('Error al crear la orden:', err);
