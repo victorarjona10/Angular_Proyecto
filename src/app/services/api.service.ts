@@ -12,52 +12,37 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getUserData(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.apiUrl}/users`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/users`);
   }
 
   getUserDataByEmail(email: string): Observable<any> {
-    const token = localStorage.getItem('email');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.apiUrl}/users/email/${email}`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/users/email/${email}`);
   }
 
   getUserById(userId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.apiUrl}/users/${userId}`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/users/${userId}`);
   }
   
   getAllUsers(page: number, limit: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const params = { page: page.toString(), limit: limit.toString() };
-    return this.http.get<any>(`${this.apiUrl}/users`, { headers, params });
+    return this.http.get<any>(`${this.apiUrl}/users`, { params });
   }
 
   inactivateUser(userId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.put<any>(`${this.apiUrl}/users/InactivateFlag/${userId}`, { headers });
+
+    return this.http.put<any>(`${this.apiUrl}/users/InactivateFlag/${userId}`, {},);
   }
 
   activateUser(userId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.put<any>(`${this.apiUrl}/users/ActivateFlag/${userId}`, { headers });
+    return this.http.put<any>(`${this.apiUrl}/users/ActivateFlag/${userId}`, {});
   }
 
   updateUser(user: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.put<any>(`${this.apiUrl}/users/${user._id}`, user, { headers });
+    return this.http.put<any>(`${this.apiUrl}/users/${user._id}`, user);
   }
 
   getOrdersByUserId(userId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.apiUrl}/orders/AllOrdersByUser/${userId}`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/orders/AllOrdersByUser/${userId}`);
   }
 
   createUser(user: any): Observable<any> {
@@ -69,20 +54,16 @@ export class ApiService {
   }
 
   createOrder(order: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post<any>(`${this.apiUrl}/orders`, order, { headers });
+    return this.http.post<any>(`${this.apiUrl}/orders`, order);
   }
 
 
   getUsersByFiltration(user: any, page: number, limit: number): Observable<any> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     // Convertir el objeto user en query parameters
     const params = new HttpParams({ fromObject: user });
 
-    return this.http.get<any>(`${this.apiUrl}/users/usersByFiltration`, { headers, params });
+    return this.http.get<any>(`${this.apiUrl}/users/usersByFiltration`, { params });
 }
 
   updateOrderQuantity(orderId: string, productId: string, quantityValue: number): Observable<any> {

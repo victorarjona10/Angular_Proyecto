@@ -1,4 +1,4 @@
-<div class="edit-container">
+<div class="edit-container"  *ngIf="!isLoading; else loading" >
   <h2>Modificar Usuario</h2>
   <form>
     <label for="name">Nombre</label>
@@ -20,3 +20,7 @@
     <button type="button" (click)="goBack()">Cancelar</button>
   </form>
 </div>
+
+<ng-template #loading>
+  <p>Cargando usuario...</p>
+</ng-template>

@@ -8,6 +8,7 @@ import { TableFilterPipe } from '../../pipes/table-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user'; 
 import { ChangeDetectorRef } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-table',
   standalone: true,
@@ -31,7 +32,7 @@ export class TableComponent {
 
   @Input() set data(value: any[]) {
     this._data = value.map((item, index) => ({ ...item, num: index + 1, flag: item.flag ?? false }));
-    this.totalPages = Math.ceil(this._data.length / this.rowsPerPage);
+    this.updatePagination(); // Actualiza la paginación al establecer nuevos datos
   }
   get data() {
     return this._data;
@@ -42,7 +43,7 @@ export class TableComponent {
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
 
-  constructor(private apiService: ApiService, private router: Router, private dialog: MatDialog, private cdr: ChangeDetectorRef) {}
+  constructor(private apiService: ApiService, private snackBar: MatSnackBar, private router: Router, private dialog: MatDialog, private cdr: ChangeDetectorRef) {}
 
   currentPage: number = 1;
   rowsPerPage: number = 5;
@@ -92,19 +93,35 @@ getUsers(page: number, limit: number) {
 }
 onSearchChange() {
   this.currentPage = 1; // Reinicia a la primera página al cambiar el texto de búsqueda
+  this.updatePagination();
+}
+
+calculatePageNumbers() {
+
+  return Math.ceil(this.data.length / this.rowsPerPage);
+
+}
+updatePagination() {
+  // Recalcular el número total de páginas
+  this.totalPages = this.calculatePageNumbers();
+
+  // Ajustar la página actual si excede el número total de páginas
+  if (this.currentPage > this.totalPages) {
+    this.currentPage = this.totalPages || 1; // Si no hay resultados, vuelve a la página 1
+  }
 }
 
       get paginatedData() {
       // Filtrar los datos primero
       const filteredData = new TableFilterPipe().transform(this.sortedData, this.searchText, [this.searchKey]);
     
-      // Recalcular el número total de páginas basado en los datos filtrados
-      this.totalPages = Math.ceil(filteredData.length / this.rowsPerPage);
+      // // Recalcular el número total de páginas basado en los datos filtrados
+      // this.totalPages = this.calculatePageNumbers();
     
-      // Ajustar la página actual si excede el número total de páginas
-      if (this.currentPage > this.totalPages) {
-        this.currentPage = this.totalPages || 1; // Si no hay resultados, vuelve a la página 1
-      }
+      // // Ajustar la página actual si excede el número total de páginas
+      // if (this.currentPage > this.totalPages) {
+      //   this.currentPage = this.totalPages || 1; // Si no hay resultados, vuelve a la página 1
+      // }
     
       // Calcular el índice inicial y final para la paginación
       const startIndex = (this.currentPage - 1) * this.rowsPerPage;
@@ -146,6 +163,7 @@ onSearchChange() {
     this.rowsPerPage = parseInt(event.target.value, 10);
 
     this.currentPage = 1; // Reset to first page
+    this.updatePagination();
   }
 
   changePageToFirst() {
@@ -202,10 +220,9 @@ ViewProfile(item: User) {
 copyToClipboard(value: string, event: MouseEvent) {
   event.stopPropagation(); // Evita que se active el evento de clic en la fila
   navigator.clipboard.writeText(value).then(() => {
-    console.log(`Valor copiado al portapapeles: ${value}`);
-    alert('ID copiado al portapapeles');
+    this.snackBar.open('ID copiado al portapapeles', 'Cerrar', { duration: 3000 });
   }).catch(err => {
-    console.error('Error al copiar al portapapeles:', err);
+    this.snackBar.open('Error al copiar al portapapeles', 'Cerrar', { duration: 3000 });
   });
 }
 
