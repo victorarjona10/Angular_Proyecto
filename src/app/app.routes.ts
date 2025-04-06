@@ -7,6 +7,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductComponent } from './components/product/product.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import { Error404Component } from './pages/error-404/error-404.component';
+import { Error401Component } from './pages/error-401/error-401.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,7 +18,10 @@ export const routes: Routes = [
   {path: 'profile/:id', component: ProfileComponent},
   { path: 'home', component: HomeComponent },
   { path: 'product/:id', component: ProductComponent },
-  { path: 'createuser', component: CreateUserComponent }
+  { path: 'createuser', component: CreateUserComponent },
+  { path: '404', component: Error404Component },
+  { path: '401', component: Error401Component },
+  { path: '**', redirectTo: '404' }
   // Altres rutes...
 ];
 

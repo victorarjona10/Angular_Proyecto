@@ -26,12 +26,13 @@ h1 {
 }
 
 app-filter-search {
-  flex: 1;
+  flex: 0 0 300px; 
   margin-right: 20px; /* Puedes eliminar este margen si usas gap */
   align-self: stretch; /* Asegura que el buscador esté alineado en la parte superior */
 }
 
 app-table {
+  flex: 0 0 1200px;
   flex: 2;
   align-self: stretch; /* Asegura que la tabla esté alineada en la parte superior */
 }

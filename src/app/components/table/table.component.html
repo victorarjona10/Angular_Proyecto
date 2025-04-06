@@ -45,7 +45,7 @@
         </ng-template>
 
         <ng-template #otherColumns>
-          {{ item[column.key] }}
+            {{ item[column.key] | shortString }}
         </ng-template>
 
       </td>
@@ -68,7 +68,7 @@
     <button (click)="changePageToLast()">»</button>
 </div>
 
-<div>
+<div class ="create-user-button">
   <button class="create-user-button" (click)="openCreateUserModal()">
     Crear Usuario
   </button>

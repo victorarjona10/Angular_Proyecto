@@ -1,8 +1,12 @@
 
 
 <div class="filter-search-container">
-  <h2>Buscar Usuarios</h2>
-  <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+  <button class="btn btn-primary" (click)="toggleForm()">
+    {{ isFormVisible ? 'Ocultar Filtros' : 'Mostrar Filtros' }}
+  </button>
+
+
+  <form *ngIf="isFormVisible" [formGroup]="searchForm" (ngSubmit)="onSearch()">
 
     <div class="form-group">
       <label for="name">Nombre</label>

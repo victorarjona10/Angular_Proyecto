@@ -5,14 +5,16 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { TableFilterPipe } from '../../pipes/table-filter.pipe';
+import { ShortStringPipe } from '../../pipes/short-string.pipe';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user'; 
 import { ChangeDetectorRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ShortStringPipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -220,9 +222,9 @@ ViewProfile(item: User) {
 copyToClipboard(value: string, event: MouseEvent) {
   event.stopPropagation(); // Evita que se active el evento de clic en la fila
   navigator.clipboard.writeText(value).then(() => {
-    this.snackBar.open('ID copiado al portapapeles', 'Cerrar', { duration: 3000 });
+    this.snackBar.open('ID copiado al portapapeles', 'Cerrar', { duration: 3000, panelClass: ['snackbar-white-background'] });
   }).catch(err => {
-    this.snackBar.open('Error al copiar al portapapeles', 'Cerrar', { duration: 3000 });
+    this.snackBar.open('Error al copiar al portapapeles', 'Cerrar', { duration: 3000, panelClass: ['snackbar-white-background'] });
   });
 }
 

@@ -3,17 +3,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../models/user';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-filter-search',
   templateUrl: './filter-search.component.html',
   styleUrls: ['./filter-search.component.css'],
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule, CommonModule]
 })
 export class FilterSearchComponent {
   isFormVisible: boolean = false;
   searchForm: FormGroup;
   @Output() searchResults = new EventEmitter<User[]>();
+
   constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.searchForm = this.fb.group({
       id: [''],

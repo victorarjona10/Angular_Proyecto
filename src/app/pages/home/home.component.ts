@@ -9,7 +9,7 @@ import { User } from '../../models/user';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  imports: [CommonModule, TableComponent , TableSearchComponent, FilterSearchComponent],
+  imports: [CommonModule, TableComponent , FilterSearchComponent],
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {

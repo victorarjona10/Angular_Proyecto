@@ -27,8 +27,21 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
         if (error.status === 401) {
           console.error('Token caducado o no válido. Redirigiendo al login.');
           localStorage.removeItem('token'); // Elimina el token caducado
-          router.navigate(['/login']); // Redirige al login
-        }
+          router.navigate(['/401']); // Redirige al login
+        }   else if (error.status === 404) {
+            // Redirigir a una página de error 404
+            console.error('Recurso no encontrado. Redirigiendo a la página 404.');
+            router.navigate(['/404']);
+          } else if (error.status >= 500) {
+            // Redirigir a una página de error genérico
+            console.error('Error del servidor. Redirigiendo a la página de error.');
+            router.navigate(['/error']);
+          } else if (error.status === 401) {
+            // Redirigir al componente de error 401
+            console.error('Token caducado o no válido. Redirigiendo al error 401.');
+            localStorage.removeItem('token'); // Elimina el token caducado
+            router.navigate(['/401']);
+          }
         return throwError(() => error);
       })
     );
