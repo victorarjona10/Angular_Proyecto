@@ -9,7 +9,7 @@ import { User } from '../../models/user';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  imports: [CommonModule, TableComponent , TableSearchComponent, FilterSearchComponent],
+  imports: [CommonModule, TableComponent , FilterSearchComponent],
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
@@ -34,16 +34,16 @@ export class HomeComponent implements OnInit {
   } 
 
   loadUsers() {
-    this.apiService.getAllUsers(1,5).subscribe({
+    this.apiService.getAllUsers(1, 5).subscribe({
       next: (data) => {
         console.log('Usuarios cargados:', data);
         this.tableData = data.map((user: User, index: number) => ({
-          num: index + 1,  
+          num: index + 1,
           ...user,
-          flag: user.Flag ?? false  
+          flag: user.Flag ?? false
         }));
         this.filteredData = [...this.tableData];
-        this.cdRef.detectChanges(); 
+        this.cdRef.detectChanges(); // Forzar la detección de cambios
       },
       error: (err) => {
         console.error('Error obteniendo los datos de los usuarios', err);
