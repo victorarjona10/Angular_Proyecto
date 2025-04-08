@@ -53,7 +53,7 @@
 
         <ng-template #otherColumns>
           <ng-container *ngIf="column.key === 'actions'; else passwordColumn">
-            <button-blue [text] = "'Modificar'" (click)="editUser(item)"></button-blue>
+            <button-blue [text] = "'Modificar'" (click)="openEditUserModal(item); $event.stopPropagation()"></button-blue>
           </ng-container>
             
         </ng-template>

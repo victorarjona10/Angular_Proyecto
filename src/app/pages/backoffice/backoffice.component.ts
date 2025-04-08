@@ -4,7 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { TableComponent } from '../../components/table/table.component';
 import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
 import { User } from '../../models/user'; 
-import { NavbarComponent } from '../../component/navbar/navbar.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-backoffice',

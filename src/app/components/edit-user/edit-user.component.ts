@@ -1,38 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { User } from '../../models/user';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
+import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-user',
-  imports: [ FormsModule, CommonModule ], // Agrega CommonModule aquí
+  imports: [ FormsModule, CommonModule, ReactiveFormsModule ], // Agrega CommonModule aquí
   standalone: true,
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css']
 })
 export class EditUserComponent implements OnInit {
   user!: User;
-  isLoading: boolean = true; // Indicador de carga
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
+  userId!: string;
+  constructor(private apiService: ApiService, private route: ActivatedRoute, @Inject(MAT_DIALOG_DATA) public data: { userId: string },
+      private dialogRef: MatDialogRef<EditUserComponent>) { this.userId = data.userId;}
 
   ngOnInit(): void {
     this.loadUser();
   }
 
   loadUser() {
-    const userId = this.route.snapshot.paramMap.get('id');  
-    if (userId) {
-      this.apiService.getUserById(userId).subscribe({
+    
+    if (this.userId) {
+      this.apiService.getUserById(this.userId).subscribe({
         next: (data) => {
           this.user = data;
-          this.isLoading = false; // Desactiva el indicador de carga
+          // Desactiva el indicador de carga
           console.log('Usuari:', this.user);
         },
         error: (err) => {
           console.error('Error cargando el usuario', err);
-          this.isLoading = false; // Desactiva el indicador de carga
+           // Desactiva el indicador de carga
         }
       });
     }
@@ -44,6 +47,7 @@ export class EditUserComponent implements OnInit {
       next: (data) => {
         console.log('Usuario actualizado:', data);
         alert('Usuari Modificat!');
+        this.dialogRef.close();
       },
       error: (err) => {
         console.error('Error actualizando el usuario', err);
@@ -53,9 +57,9 @@ export class EditUserComponent implements OnInit {
     window.history.back();
   }
 
-  goBack()
-  {
-    window.history.back();
+
+  onCancel() {
+    this.dialogRef.close();
   }
 
 

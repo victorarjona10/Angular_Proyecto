@@ -9,7 +9,7 @@ import { User } from '../../models/user';
 import { Order } from '../../models/order'; // Importa el modelo Order
 import { CreateOrderComponent } from '../../components/create-order/create-order.component';
 import { MatDialog } from '@angular/material/dialog';
-import { NavbarComponent } from '../../component/navbar/navbar.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { BlueComponent } from '../../UI/buttons/blue/blue.component';
 
 

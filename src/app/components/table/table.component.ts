@@ -21,6 +21,7 @@ import { ShortStringPipe } from '../../pipes/short-string.pipe';
 
 // Componentes UI
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 //import { LightComponent } from '../../UI/buttons/light/light.component';
 import { BlueComponent } from '../../UI/buttons/blue/blue.component';
 //import { GreenComponent } from '../../UI/buttons/green/green.component';
@@ -80,6 +81,15 @@ export class TableComponent {
       width: '600px',
       height: 'auto',
       panelClass: 'custom-dialog-container'
+    });
+  }
+
+  openEditUserModal(item: User) {
+    this.dialog.open(EditUserComponent, {
+      width: '600px',
+      height: 'auto',
+      panelClass: 'custom-dialog-container',
+      data: { userId: item._id }
     });
   }
 
