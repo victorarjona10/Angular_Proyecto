@@ -4,15 +4,15 @@ import { ApiService } from '../../services/api.service';
 import { TableComponent } from '../../components/table/table.component';
 import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
 import { User } from '../../models/user'; 
-import { Bb8ToggleComponent } from '../../UI/bb8-toggle/bb8-toggle.component';
-
+import { NavbarComponent } from '../../component/navbar/navbar.component';
+import { ActivatedRoute } from '@angular/router';
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  imports: [CommonModule, TableComponent , FilterSearchComponent, Bb8ToggleComponent],
-  styleUrls: ['./home.component.css']
+  selector: 'app-backoffice',
+  templateUrl: './backoffice.component.html',
+  imports: [CommonModule, TableComponent , FilterSearchComponent, NavbarComponent],
+  styleUrls: ['./backoffice.component.css']
 })
-export class HomeComponent implements OnInit {
+export class BackOfficeComponent implements OnInit {
   userData!: User;
   tableData: User[] = []; // Datos para la tabla
   filteredData: User[] = [];
@@ -28,17 +28,20 @@ export class HomeComponent implements OnInit {
     { key: 'actions', label: 'Actions' }
   ];
 
-  constructor(private apiService: ApiService, private cdRef: ChangeDetectorRef) {}
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadUsers();
+    this.route.queryParams.subscribe(params => {
+      this.isDarkTheme = params['isDarkTheme'] === 'true'; // Convertir el string a booleano
+    });
   } 
-  isDarkTheme = false; // Variable para controlar el tema actual
+  isDarkTheme: boolean = false; // Variable para controlar el tema actual
 
-  // Función que se ejecuta al cambiar el estado del toggle
-  toggleTheme(event: any): void {
-    this.isDarkTheme = !!event; // Actualiza el tema según el valor emitido por bb8-toggle
-  }
+  // // Función que se ejecuta al cambiar el estado del toggle
+  // toggleTheme(event: any): void {
+  //   this.isDarkTheme = !!event; // Actualiza el tema según el valor emitido por bb8-toggle
+  // }
 
   loadUsers() {
     this.apiService.getAllUsers(1, 5).subscribe({

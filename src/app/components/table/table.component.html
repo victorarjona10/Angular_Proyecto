@@ -72,7 +72,7 @@
 <div class="pagination-controls">
   <label for="rowsPerPage">Filas por página:</label>
   <select id="rowsPerPage" (change)="changeRowsPerPage($event)">
-    <option *ngFor="let option of rowsPerPageOptions" [value]="option">
+    <option *ngFor="let option of rowsPerPageOptions" [value]="option" class = "search-select" >
       {{ option }}
     </option>
   </select>

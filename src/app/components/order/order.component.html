@@ -3,7 +3,7 @@
     <div>
       <strong>Order ID:</strong> {{ order._id }}
     </div>
-    <button class="btn btn-danger" (click)="DeleteOrder(order._id)">Delete Order</button>
+    <button-red [text] = "'Delete Order'"class="btn btn-danger" (click)="DeleteOrder(order._id)">Delete Order</button-red>
   </div>
   <br>
   <strong>Products:</strong>

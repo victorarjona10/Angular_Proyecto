@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
 import { Order } from '../../models/order';
 import { ApiService } from '../../services/api.service';
+import { RedComponent } from '../../UI/buttons/red/red.component';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css'],
-  imports: [ProductComponent, CommonModule],
+  imports: [ProductComponent, CommonModule, RedComponent],
   standalone: true 
 })
 export class OrderComponent implements OnInit {

@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
-import { Order } from '../../models/order';
+import { GreenComponent } from '../../UI/buttons/green/green.component';
+import { RedComponent } from '../../UI/buttons/red/red.component';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
-  imports: [CommonModule],
+  imports: [CommonModule, GreenComponent, RedComponent],
   standalone: true
 })
 export class ProductComponent implements OnInit {

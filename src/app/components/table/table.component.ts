@@ -98,7 +98,7 @@ export class TableComponent {
   }
 
   ViewProfile(item: User) {
-    this.router.navigate(['/profile', item._id]);
+    this.router.navigate(['/profile', item._id], { queryParams: { isDarkTheme: this.isDarkMode } });
   }
 
   // 🔹 CRUD Flags
