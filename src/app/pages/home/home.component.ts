@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { TableComponent } from '../../components/table/table.component';
 import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
-import { TableSearchComponent } from '../../components/table-search/table-search.component';
 import { User } from '../../models/user'; 
 import { Bb8ToggleComponent } from '../../UI/bb8-toggle/bb8-toggle.component';
 
@@ -25,7 +24,8 @@ export class HomeComponent implements OnInit {
     { key: 'phone', label: 'Phone' },
     { key: 'password', label: 'Password' },
     { key: 'wallet', label: 'Wallet' },
-    { key: 'flag', label: 'Flag' }
+    { key: 'flag', label: 'Flag' },
+    { key: 'actions', label: 'Actions' }
   ];
 
   constructor(private apiService: ApiService, private cdRef: ChangeDetectorRef) {}

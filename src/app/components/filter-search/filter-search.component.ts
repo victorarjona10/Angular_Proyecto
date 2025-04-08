@@ -20,8 +20,7 @@ export class FilterSearchComponent {
 
   constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.searchForm = this.fb.group({
-      id: [''],
-      name: ['Name'],
+      name: [''],
       email: [''],
       phone: ['']
     });

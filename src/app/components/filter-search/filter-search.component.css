@@ -57,8 +57,10 @@ button:hover {
 
 .button-group {
   display: flex;
-  gap: 10px; /* Espaciado entre los botones */
-  justify-content: flex-start; /* Alineación a la izquierda */
+  gap: 10px;
+  justify-content: flex-start;
+  position: relative; /* Cambia a absolute si es necesario */
+  left: -40px; /* Ajusta este valor para moverlos más a la izquierda */
 }
 
 .btn {

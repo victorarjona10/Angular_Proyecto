@@ -1,3 +1,4 @@
+<div [class.dark-mode]="isDarkMode" [class.light-mode]="!isDarkMode">
 <div class="search-container">
   <input 
     type="text" 
@@ -21,12 +22,16 @@
         <span *ngIf="sortColumn === column.key">
           {{ sortDirection === "asc" ? "▲" : "▼" }}
         </span>
+
+        
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of paginatedData" (click)="ViewProfile(item)">
-      <td *ngFor="let column of columns" [ngClass]="{'inactive': !item.Flag && column.key !== 'flag'}" 
+    <tr *ngFor="let item of paginatedData" (click)="ViewProfile(item)"
+    [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
+      
+      <td *ngFor="let column of columns"  
           (click)="column.key === 'flag' ? $event.stopPropagation() : null">
         
         <ng-container *ngIf="column.key === '_id' || column.key === 'email' || column.key === 'name' || column.key === 'phone'; else defaultColumn">
@@ -36,16 +41,27 @@
 
         <ng-template #defaultColumn>
           <ng-container *ngIf="column.key === 'flag'; else otherColumns">
-            <div class="buttonBox">
-              <button-red [text] = "'X'"  (click)="inactivateUser(item)"></button-red>
-              <button-green [text] = "'O'"  (click)="activateUser(item)"></button-green>
-              <button-blue [text] = "'Modificar'" (click)="editUser(item)"></button-blue>
-            </div>
+            <td (click)=" $event.stopPropagation()">
+              <checkbox-1 
+                [checked]="item.flag" 
+                (change)="onFlagChange(item)">
+              </checkbox-1>
+            </td>
+            
           </ng-container>
         </ng-template>
 
         <ng-template #otherColumns>
-            {{ item[column.key] | shortString }}
+          <ng-container *ngIf="column.key === 'actions'; else passwordColumn">
+            <button-blue [text] = "'Modificar'" (click)="editUser(item)"></button-blue>
+          </ng-container>
+            
+        </ng-template>
+
+        <ng-template #passwordColumn>
+          <ng-container >
+            {{ item[column.key] | shortString  }}
+          </ng-container>
         </ng-template>
 
       </td>
@@ -70,4 +86,6 @@
 
 <div class ="create-user-button">
     <button-blue [text]="'Crear Usuario'" class="create-user-button" (click)="openCreateUserModal()"></button-blue>
+</div>
+
 </div>
