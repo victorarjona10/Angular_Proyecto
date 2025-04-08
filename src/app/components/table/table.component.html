@@ -37,9 +37,9 @@
         <ng-template #defaultColumn>
           <ng-container *ngIf="column.key === 'flag'; else otherColumns">
             <div class="buttonBox">
-              <button class="btn-red" (click)="inactivateUser(item)">X</button>
-              <button class="btn-green" (click)="activateUser(item)">O</button>
-              <button (click)="editUser(item)">Modificar</button>
+              <button-red [text] = "'X'"  (click)="inactivateUser(item)"></button-red>
+              <button-green [text] = "'O'"  (click)="activateUser(item)"></button-green>
+              <button-blue [text] = "'Modificar'" (click)="editUser(item)"></button-blue>
             </div>
           </ng-container>
         </ng-template>
@@ -61,15 +61,13 @@
     </option>
   </select>
 
-  <button (click)="changePageToFirst()">«</button>
-    <button (click)="changePage(-1)" [disabled]="currentPage === 1">‹</button>
+  <button-blue [text]="'«'" (click)="changePageToFirst()">«</button-blue>
+    <button-blue [text]="'‹'" (click)="changePage(-1)" >‹</button-blue>
     <span>Page {{ currentPage }}</span>
-    <button (click)="changePage(1)">›</button>
-    <button (click)="changePageToLast()">»</button>
+    <button-blue [text]="'›'" (click)="changePage(1)">›</button-blue>
+    <button-blue [text]="'»'" (click)="changePageToLast()"></button-blue>
 </div>
 
 <div class ="create-user-button">
-  <button class="create-user-button" (click)="openCreateUserModal()">
-    Crear Usuario
-  </button>
+    <button-blue [text]="'Crear Usuario'" class="create-user-button" (click)="openCreateUserModal()"></button-blue>
 </div>

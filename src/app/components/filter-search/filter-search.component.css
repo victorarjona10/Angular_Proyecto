@@ -2,9 +2,9 @@
   max-width: 300px;
   margin: 0 auto;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc00;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #f9f9f900;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -70,12 +70,12 @@ button:hover {
 }
 
 .btn-secondary {
-  background-color: #415261;
+  background-color: #41526100;
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #d1d1d1;
+  background-color: #d1d1d100;
   color: #415261
 }
 button {

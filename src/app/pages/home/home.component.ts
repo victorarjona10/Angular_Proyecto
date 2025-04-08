@@ -5,11 +5,12 @@ import { TableComponent } from '../../components/table/table.component';
 import { FilterSearchComponent } from '../../components/filter-search/filter-search.component';
 import { TableSearchComponent } from '../../components/table-search/table-search.component';
 import { User } from '../../models/user'; 
+import { Bb8ToggleComponent } from '../../UI/bb8-toggle/bb8-toggle.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  imports: [CommonModule, TableComponent , FilterSearchComponent],
+  imports: [CommonModule, TableComponent , FilterSearchComponent, Bb8ToggleComponent],
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
@@ -32,6 +33,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadUsers();
   } 
+  isDarkTheme = false; // Variable para controlar el tema actual
+
+  // Función que se ejecuta al cambiar el estado del toggle
+  toggleTheme(event: any): void {
+    this.isDarkTheme = !!event; // Actualiza el tema según el valor emitido por bb8-toggle
+  }
 
   loadUsers() {
     this.apiService.getAllUsers(1, 5).subscribe({

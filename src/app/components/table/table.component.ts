@@ -10,11 +10,14 @@ import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user'; 
 import { ChangeDetectorRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { LightComponent } from '../../UI/buttons/light/light.component';
+import { BlueComponent } from '../../UI/buttons/blue/blue.component';
+import { GreenComponent } from '../../UI/buttons/green/green.component';
+import { RedComponent } from '../../UI/buttons/red/red.component';
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule, FormsModule, ShortStringPipe],
+  imports: [CommonModule, FormsModule, ShortStringPipe, RedComponent, GreenComponent , BlueComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })

@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { SearchComponent } from '../../UI/input-text/search/search.component';
 
 @Component({
   selector: 'app-table-search',
   templateUrl: './table-search.component.html',
   styleUrls: ['./table-search.component.css'],
-  imports: [FormsModule]
+  imports: [FormsModule, SearchComponent],
 })
 export class TableSearchComponent {
   searchTerm: string = '';
