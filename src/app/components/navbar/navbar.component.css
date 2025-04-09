@@ -1,38 +1,105 @@
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #0056b3; /* Fondo azul */
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-  
-  }
+/* From Uiverse.io by SelfMadeSystem */ 
+/* From Uiverse.io by kandalgaonkarshubham */ 
+.container {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        #0056b3 23.5%, /* Cambiado a azul */
+        rgba(0, 123, 255, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        #003f7f 24%, /* Cambiado a un azul más oscuro */
+        rgba(240, 166, 17, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        #0056b3 14%, /* Cambiado a azul */
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 85%,
+        #0056b3 0 /* Cambiado a azul */
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        #0056b3 24%, /* Cambiado a azul */
+        #003f7f 0, /* Cambiado a un azul más oscuro */
+        #003f7f 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #003f7f 0,
+        #003f7f 76%,
+        #0056b3 0 /* Cambiado a azul */
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        #0056b3 24%, /* Cambiado a azul */
+        #003f7f 0, /* Cambiado a un azul más oscuro */
+        #003f7f 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #003f7f 0,
+        #003f7f 76%,
+        #0056b3 0 /* Cambiado a azul */
+      )
+      0 0,
+    linear-gradient(90deg, #003f7f 2%, #0056b3 0, #0056b3 98%, #003f7f 0%) 0 0
+      #0056b3; /* Cambiado a azul */
+  background-size: 40px 60px;
+}
+.center {
+  display: flex; /* Alinea los elementos en una fila */
+  align-items: center; /* Centra verticalmente la imagen y el texto */
+  justify-content: center; /* Centra horizontalmente el contenido */
+  gap: 10px; /* Espaciado entre la imagen y el texto */
+}
 
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    position: relative;
-    background-color: #0056b3;
-    height: 100px;
-  }
+.header {
+  display: flex;
+  align-items: center; /* Alinea los elementos verticalmente */
+  justify-content: space-between; /* Distribuye los elementos: izquierda, centro y derecha */
+  margin-bottom: 20px;
+  position: relative;
+  height: 100px;
+  padding: 0 20px; /* Espaciado horizontal opcional */
+}
   
   .toggle {
-    position: absolute;
-    top: 40%; /* Baja el toggle al 50% de la altura del contenedor */
+    position: relative;
+    top: 30%; /* Baja el toggle al 50% de la altura del contenedor */
     left: 10px; /* Ajusta la posición horizontal si es necesario */
     transform: translateY(-50%); /* Centra el toggle verticalmente */
     margin: 10px; /* Espaciado opcional */
+    margin-right:auto; /* Alinea a la izquierda */
   }
   
   .logo {
     width: 50px;
     height: 50px;
-    margin-right: 20px;
+    margin-right: 10px;
+    border: 5px solid #00000056; /* Color del marco */
+  border-radius: 20%; /* Bordes redondeados */
+  padding: 5px; /* Espaciado interno entre la imagen y el marco */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto estético */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para efectos */
+  }
+  .logo:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada al hacer hover */
   }
   
   h1 {
     margin: 0;
+    color:rgb(27, 27, 27);
+    text-align: center;
+    flex-grow: 1; /* Permite que el texto ocupe el espacio central */
+
   }
+
+ .button{
+  margin-left: auto;
+  margin-right: 15px;
+ }

@@ -35,7 +35,7 @@
           (click)="column.key === 'flag' ? $event.stopPropagation() : null">
         
         <ng-container *ngIf="column.key === '_id' || column.key === 'email' || column.key === 'name' || column.key === 'phone'; else defaultColumn">
-          {{ item[column.key] }}
+          {{ item[column.key] | shortString}}
           <button class="copy-button" (click)="copyToClipboard(item[column.key], $event); $event.stopPropagation()">📋</button>
         </ng-container>
 

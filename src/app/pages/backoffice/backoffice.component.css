@@ -2,15 +2,20 @@
 
 html, body {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden; 
 }
 
 .container-dark {
   width: 100vw;
-
+  background-attachment: fixed; /* Fija el fondo para que abarque todo el contenido */
+  background-size: cover; /* Asegura que el fondo cubra todo el área */
+  overflow: auto;
   min-height: 100vh;
   height: auto;
+  width: auto;
   background: radial-gradient(
         circle farthest-side at 0% 50%,
         #282828 23.5%,
@@ -60,9 +65,13 @@ html, body {
 }
 
 .container-light {
+  background-attachment: fixed; /* Fija el fondo para que abarque todo el contenido */
+  background-size: cover; /* Asegura que el fondo cubra todo el área */
+  overflow: auto;
   width: 100vw;
   min-height: 100vh;
   height: auto;
+  width: auto;
   background: radial-gradient(
         circle farthest-side at 0% 50%,
         #f0f0f0 23.5%,

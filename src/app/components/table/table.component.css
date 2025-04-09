@@ -9,6 +9,11 @@ table {
   margin: 0;
   font-size: 1rem;
   text-align: left;
+  border-collapse: separate; /* Cambiado a 'separate' */
+  border-spacing: 0; /* Asegúrate de que no haya espacio entre las celdas */
+  border-radius: 20px; /* Bordes redondeados */
+  overflow: hidden; /* Asegúrate de que el contenido no sobresalga */
+
 }
 
 thead {

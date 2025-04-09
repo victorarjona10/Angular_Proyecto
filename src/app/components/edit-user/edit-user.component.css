@@ -1,10 +1,9 @@
 .edit-container{
-  max-width: 400px;
-  margin: auto;
-  padding: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
 
   h2 {
     text-align: center;
