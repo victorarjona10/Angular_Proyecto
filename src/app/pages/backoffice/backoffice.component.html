@@ -1,9 +1,8 @@
-<div class="header">
-  <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhcEX9msN-xI5AMEn6FLQRaUwLJfSQ3_qS-mTrOsjn31oHMrb6xaZMaEO6lyMSayHBpenVEPUXimE3aBjsONhBa7BdSkmL6iHVL2NUII85cYBaCTCZ3_pf8mgBuWFWViMzajiOMOn5i-z-F4Rw6SaLt39gNMxRs9HAqIQJrS2Div0B5ND24_s3Qs8AxsTkd=s1600" alt="Logo" class="logo">
-  <h1 class="tuclase">Back-Office</h1>
-</div>
+<div [class]="isDarkTheme ? 'container-dark' : 'container-light'">
 
 
+        <navbar  (themeChange)="isDarkTheme = $event"></navbar>
+ 
 
 <!-- <div *ngIf="userData">
   <h2>Dades de l'usuari:</h2>
@@ -21,11 +20,13 @@
     <app-table 
     #tableRef
     [data]="filteredData" 
-    [columns]="tableColumns">
+    [columns]="tableColumns"
+    [isDarkMode]="isDarkTheme">
+    
     </app-table>
   </div>
   
   <app-filter-search (searchResults)="handleSearchResults($event)" [page]="tableRef.currentPage" 
   [limit]="tableRef.rowsPerPage" ></app-filter-search>
 </div>
-
+</div>

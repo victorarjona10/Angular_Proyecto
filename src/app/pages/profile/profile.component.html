@@ -1,5 +1,7 @@
 
-<div class="profile-container">
+<div [class]="isDarkTheme ? 'container-dark' : 'container-light'">
+<navbar  (themeChange)="isDarkTheme = $event"></navbar>
+<div [class]= "isDarkTheme ? 'profile-container-dark' : 'profile-container-light'">
   <div class="profile-header">
     <img class="profile-avatar" [src]="user.avatar" alt="User Avatar" />
     <h1 class="profile-name">{{ user.name || 'Usuario sin nombre' }}</h1>
@@ -28,11 +30,14 @@
         <p>No hay órdenes disponibles para este usuario.</p>
       </ng-template>
     </div>
-    <button class="exit-button" (click)="Return()">Salir</button>
+    <button-blue [text] = "'Salir'" class="exit-button" (click)="Return()">
+
+    </button-blue>
     <div>
-      <button class="create-order-button" (click)="openCreateOrderModal()">
-        Añadir Orden
-      </button>
+      <button-blue [text] = "'Añadir Orden'" class="create-order-button" (click)="openCreateOrderModal()">
+
+      </button-blue>
     </div>
   </div>
+</div>
 </div>

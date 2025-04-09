@@ -1,0 +1,145 @@
+/* From Uiverse.io by kandalgaonkarshubham */ 
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container-dark {
+  width: 100vw;
+
+  min-height: 100vh;
+  height: auto;
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        #282828 23.5%,
+        rgba(255, 170, 0, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        #2c3539 24%,
+        rgba(240, 166, 17, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        #282828 14%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 85%,
+        #282828 0
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        #282828 24%,
+        #2c3539 0,
+        #2c3539 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #2c3539 0,
+        #2c3539 76%,
+        #282828 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        #282828 24%,
+        #2c3539 0,
+        #2c3539 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #2c3539 0,
+        #2c3539 76%,
+        #282828 0
+      )
+      0 0,
+    linear-gradient(90deg, #2c3539 2%, #282828 0, #282828 98%, #2c3539 0%) 0 0
+      #282828;
+  background-size: 40px 60px;
+}
+
+.container-light {
+  width: 100vw;
+  min-height: 100vh;
+  height: auto;
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        #f0f0f0 23.5%,
+        rgba(255, 255, 255, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        #e0e0e0 24%,
+        rgba(255, 255, 255, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        #f0f0f0 14%,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0) 85%,
+        #f0f0f0 0
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        #f0f0f0 24%,
+        #e0e0e0 0,
+        #e0e0e0 26%,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0) 74%,
+        #e0e0e0 0,
+        #e0e0e0 76%,
+        #f0f0f0 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        #f0f0f0 24%,
+        #e0e0e0 0,
+        #e0e0e0 26%,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0) 74%,
+        #e0e0e0 0,
+        #e0e0e0 76%,
+        #f0f0f0 0
+      )
+      0 0,
+    linear-gradient(90deg, #e0e0e0 2%, #f0f0f0 0, #f0f0f0 98%, #e0e0e0 0%) 0 0
+      #f0f0f0;
+  background-size: 40px 60px;
+}
+
+.top-space {
+  height: 20px; /* Ajusta este valor según el espacio que necesites */
+  width: 100%;
+}
+
+
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinea los elementos en la parte superior */
+  padding: 20px;
+  gap: 20px; /* Añade espacio entre los elementos hijos */
+}
+
+app-filter-search {
+  flex: 0 0 300px; 
+  margin-right: 20px; /* Puedes eliminar este margen si usas gap */
+  align-self: stretch; /* Asegura que el buscador esté alineado en la parte superior */
+}
+
+app-table {
+  flex: 0 0 1200px;
+  flex: 2;
+  align-self: stretch; /* Asegura que la tabla esté alineada en la parte superior */
+}
+
+.tuclase {text-align: left; 
+  font-family: Arial; 
+  font-size: 30px; 
+  COLOR: white; 
+  text-shadow: 0px 0px 9px #508AD3;
+}

@@ -1,0 +1,19 @@
+/* From Uiverse.io by arieshiphop */ 
+button {
+    font-size: 17px;
+    padding: 0.5em 2em;
+    border: transparent;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    background: rgb(30, 255, 34);
+    color: white;
+    border-radius: 4px;
+   }
+   
+   button:hover {
+    background: rgb(2, 36, 0);
+    background: linear-gradient(90deg, rgb(53, 255, 30) 0%, rgb(6, 255, 151) 100%);
+   }
+   
+   button:active {
+    transform: translate(0em, 0.2em);
+   }

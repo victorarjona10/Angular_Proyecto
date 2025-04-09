@@ -4,12 +4,14 @@ import { ApiService } from '../../services/api.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../models/user';
 import { CommonModule } from '@angular/common';
+import { BlueComponent } from '../../UI/buttons/blue/blue.component';
+import { FormInputComponent } from '../../UI/input-text/form-input/form-input.component';
 
 @Component({
   selector: 'app-filter-search',
   templateUrl: './filter-search.component.html',
   styleUrls: ['./filter-search.component.css'],
-  imports: [ReactiveFormsModule, CommonModule]
+  imports: [ReactiveFormsModule, CommonModule, BlueComponent, FormInputComponent],
 })
 export class FilterSearchComponent {
   isFormVisible: boolean = false;
@@ -18,7 +20,6 @@ export class FilterSearchComponent {
 
   constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.searchForm = this.fb.group({
-      id: [''],
       name: [''],
       email: [''],
       phone: ['']

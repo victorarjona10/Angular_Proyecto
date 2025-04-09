@@ -4,23 +4,25 @@ import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ProductComponent } from '../product/product.component';
-import { OrderComponent } from '../order/order.component';
+import { OrderComponent } from '../../components/order/order.component';
 import { User } from '../../models/user';
 import { Order } from '../../models/order'; // Importa el modelo Order
-import { CreateOrderComponent } from '../create-order/create-order.component';
+import { CreateOrderComponent } from '../../components/create-order/create-order.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { BlueComponent } from '../../UI/buttons/blue/blue.component';
 
 
 @Component({
   selector: 'app-profile',
-  imports: [ CommonModule, OrderComponent],
+  imports: [ CommonModule, OrderComponent, NavbarComponent, BlueComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit{
 
   user: User = new User();
+  isDarkTheme: boolean = false; // Controla el modo oscuro o claro
 
   orders: Order[] = [];
 
@@ -29,6 +31,9 @@ export class ProfileComponent implements OnInit{
     ngOnInit(): void {
       this.loadUser();
       this.loadOrders();
+      this.route.queryParams.subscribe(params => {
+        this.isDarkTheme = params['isDarkTheme'] === 'true'; // Convertir el string a booleano
+      });
     }
   
     loadUser() {
@@ -61,7 +66,9 @@ export class ProfileComponent implements OnInit{
 
     Return()
     {
-      window.history.back();
+
+        this.router.navigate(['/home'], { queryParams: { isDarkTheme: this.isDarkTheme } });
+
     
     }
 

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterSearchComponent } from './filter-search.component';
+import { Bb8ToggleComponent } from './bb8-toggle.component';
 
-describe('FilterSearchComponent', () => {
-  let component: FilterSearchComponent;
-  let fixture: ComponentFixture<FilterSearchComponent>;
+describe('Bb8ToggleComponent', () => {
+  let component: Bb8ToggleComponent;
+  let fixture: ComponentFixture<Bb8ToggleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FilterSearchComponent]
+      imports: [Bb8ToggleComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FilterSearchComponent);
+    fixture = TestBed.createComponent(Bb8ToggleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
