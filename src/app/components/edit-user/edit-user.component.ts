@@ -6,6 +6,7 @@ import { User } from '../../models/user';
 import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { MatDialogRef,  MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user',
@@ -17,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class EditUserComponent implements OnInit {
   user!: User;
   userId!: string;
-  constructor(private apiService: ApiService, private route: ActivatedRoute, @Inject(MAT_DIALOG_DATA) public data: { userId: string },
+  constructor(private apiService: ApiService, private route: ActivatedRoute, @Inject(MAT_DIALOG_DATA) public data: { userId: string }, private router: Router,
       private dialogRef: MatDialogRef<EditUserComponent>) { this.userId = data.userId;}
 
   ngOnInit(): void {
@@ -54,7 +55,7 @@ export class EditUserComponent implements OnInit {
         alert('Error');
       }
     });
-    window.history.back();
+    this.router.navigate(['/home']);
   }
 
 

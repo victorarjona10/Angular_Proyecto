@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ShortStringPipe implements PipeTransform {
 
   transform(value: string): string {
-    return value.length > 20 ? value.substring(0, 20) + '...' : value;
+    return value.length > 20 ? value.substring(0, 10) + '...' : value;
   }
 
 }
