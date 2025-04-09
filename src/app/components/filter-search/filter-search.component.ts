@@ -48,6 +48,10 @@ export class FilterSearchComponent {
     this.apiService.getUsersByFiltration(cleanedParams, this.page, this.limit).subscribe({
       next: (data) => {
         console.log('Usuarios encontrados:', data);
+        const processedData = data.map((user: User) => ({
+          ...user,
+          flag: user.Flag ?? true, // Inicializa `flag` si no está presente
+        }));
         this.searchResults.emit(data);
       },
       error: (err) => {

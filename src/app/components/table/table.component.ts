@@ -40,7 +40,7 @@ import { CheckboxComponent } from '../../UI/checkbox/checkbox/checkbox.component
 export class TableComponent {
   // 🔹 Inputs / Outputs
   @Input() set data(value: any[]) {
-    this._data = value.map((item, index) => ({ ...item, num: index + 1, flag: item.flag ?? false }));
+    this._data = value.map((item, index) => ({ ...item, num: index + 1, flag: item.Flag ?? false }));
     this.updatePagination();
   }
   get data() {
