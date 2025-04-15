@@ -1,3 +1,4 @@
+<div [class.dark-mode]="isDarkMode" [class.light-mode]="!isDarkMode">
 <div class="search-container">
   <input 
     type="text" 
@@ -21,31 +22,46 @@
         <span *ngIf="sortColumn === column.key">
           {{ sortDirection === "asc" ? "▲" : "▼" }}
         </span>
+
+        
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of paginatedData" (click)="ViewProfile(item)">
-      <td *ngFor="let column of columns" [ngClass]="{'inactive': !item.Flag && column.key !== 'flag'}" 
+    <tr *ngFor="let item of paginatedData" (click)="ViewProfile(item)"
+    [ngClass]="{'dark-mode': isDarkMode, 'light-mode': !isDarkMode}">
+      
+      <td *ngFor="let column of columns"  
           (click)="column.key === 'flag' ? $event.stopPropagation() : null">
         
         <ng-container *ngIf="column.key === '_id' || column.key === 'email' || column.key === 'name' || column.key === 'phone'; else defaultColumn">
-          {{ item[column.key] }}
+          {{ item[column.key] | shortString}}
           <button class="copy-button" (click)="copyToClipboard(item[column.key], $event); $event.stopPropagation()">📋</button>
         </ng-container>
 
         <ng-template #defaultColumn>
           <ng-container *ngIf="column.key === 'flag'; else otherColumns">
-            <div class="buttonBox">
-              <button class="btn-red" (click)="inactivateUser(item)">X</button>
-              <button class="btn-green" (click)="activateUser(item)">O</button>
-              <button (click)="editUser(item)">Modificar</button>
-            </div>
+            <td (click)=" $event.stopPropagation()">
+              <checkbox-1 
+                [checked]="item.flag" 
+                (change)="onFlagChange(item)">
+              </checkbox-1>
+            </td>
+            
           </ng-container>
         </ng-template>
 
         <ng-template #otherColumns>
-          {{ item[column.key] }}
+          <ng-container *ngIf="column.key === 'actions'; else passwordColumn">
+            <button-blue [text] = "'Modificar'" (click)="openEditUserModal(item); $event.stopPropagation()"></button-blue>
+          </ng-container>
+            
+        </ng-template>
+
+        <ng-template #passwordColumn>
+          <ng-container >
+            {{ item[column.key] | shortString  }}
+          </ng-container>
         </ng-template>
 
       </td>
@@ -56,20 +72,20 @@
 <div class="pagination-controls">
   <label for="rowsPerPage">Filas por página:</label>
   <select id="rowsPerPage" (change)="changeRowsPerPage($event)">
-    <option *ngFor="let option of rowsPerPageOptions" [value]="option">
+    <option *ngFor="let option of rowsPerPageOptions" [value]="option" class = "search-select" >
       {{ option }}
     </option>
   </select>
 
-  <button (click)="changePageToFirst()">«</button>
-    <button (click)="changePage(-1)" [disabled]="currentPage === 1">‹</button>
+  <button-blue [text]="'«'" (click)="changePageToFirst()">«</button-blue>
+    <button-blue [text]="'‹'" (click)="changePage(-1)" >‹</button-blue>
     <span>Page {{ currentPage }}</span>
-    <button (click)="changePage(1)">›</button>
-    <button (click)="changePageToLast()">»</button>
+    <button-blue [text]="'›'" (click)="changePage(1)">›</button-blue>
+    <button-blue [text]="'»'" (click)="changePageToLast()"></button-blue>
 </div>
 
-<div>
-  <button class="create-user-button" (click)="openCreateUserModal()">
-    Crear Usuario
-  </button>
+<div class ="create-user-button">
+    <button-blue [text]="'Crear Usuario'" class="create-user-button" (click)="openCreateUserModal()"></button-blue>
+</div>
+
 </div>

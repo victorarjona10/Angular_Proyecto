@@ -15,7 +15,7 @@
 
 .button-container {
   display: flex;
-  gap: 10px; /* Espaciado entre los botones */
+  gap: 30px; /* Espaciado entre los botones */
   margin-top: 10px;
 }
 
@@ -30,22 +30,8 @@
   width: 40px;
 }
 
-.quantity-button:hover {
-  transform: scale(1.1);
-}
 
-.quantity-button.add {
-  background-color: #28a745; 
-}
 
-.quantity-button.add:hover {
-  background-color: #218838; 
-}
 
-.quantity-button.subtract {
-  background-color: #dc3545; /* Rojo */
-}
 
-.quantity-button.subtract:hover {
-  background-color: #c82333; 
-}
+

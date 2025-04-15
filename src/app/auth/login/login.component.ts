@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = 'dennis@example.com';
-  password: string = 'securepassword123';
+  email: string = 'pol@example.com';
+  password: string = '1234';
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -21,7 +21,10 @@ export class LoginComponent {
     this.apiService.Login(this.email, this.password).subscribe({
       next: (res) => {
         console.log('Login correcte', res);
-        localStorage.setItem('token', res.token); 
+        localStorage.setItem('token', res.admin.token); 
+        console.log('Token guardat:', res.admin.token);
+        localStorage.setItem('refresh_token', res.admin.refreshToken);
+        console.log('Refresh Token guardat:', res.admin.refreshToken);
         localStorage.setItem('email', this.email);
         alert('Login correcte!');
         this.router.navigate(['/home']);

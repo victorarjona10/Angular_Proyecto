@@ -1,4 +1,4 @@
-<div class="edit-container">
+<div class="edit-container" *ngIf="user" >
   <h2>Modificar Usuario</h2>
   <form>
     <label for="name">Nombre</label>
@@ -17,6 +17,7 @@
     <input type="text" id="avatar" [(ngModel)]="user.avatar" name="avatar" placeholder="https://example.com/avatar.jpg" />
     
     <button type="button" (click)="updateUser()">Guardar Cambios</button>
-    <button type="button" (click)="goBack()">Cancelar</button>
+    <button type="button" (click)="onCancel()">Cancelar</button>
   </form>
 </div>
+

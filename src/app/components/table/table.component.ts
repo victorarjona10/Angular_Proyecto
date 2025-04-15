@@ -1,37 +1,47 @@
+// Angular Core
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ApiService } from '../../services/api.service';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { CreateUserComponent } from '../create-user/create-user.component';
-import { TableFilterPipe } from '../../pipes/table-filter.pipe';
-import { FormsModule } from '@angular/forms';
-import { User } from '../../models/user'; 
 import { ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+// Angular Material
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+// Servicios
+import { ApiService } from '../../services/api.service';
+
+// Modelos
+import { User } from '../../models/user'; 
+
+// Pipes
+import { TableFilterPipe } from '../../pipes/table-filter.pipe';
+import { ShortStringPipe } from '../../pipes/short-string.pipe';
+
+// Componentes UI
+import { CreateUserComponent } from '../create-user/create-user.component';
+import { EditUserComponent } from '../edit-user/edit-user.component';
+//import { LightComponent } from '../../UI/buttons/light/light.component';
+import { BlueComponent } from '../../UI/buttons/blue/blue.component';
+//import { GreenComponent } from '../../UI/buttons/green/green.component';
+//import { RedComponent } from '../../UI/buttons/red/red.component';
+import { CheckboxComponent } from '../../UI/checkbox/checkbox/checkbox.component';
+
+
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ShortStringPipe , BlueComponent, CheckboxComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
+
 export class TableComponent {
-
-  searchText: string = ''; // Texto de búsqueda
-  searchKey: string = 'name'; // Clave seleccionada para buscar (por defecto: 'name')
-
-
-  openCreateUserModal() {
-    this.dialog.open(CreateUserComponent, {
-      width: '600px', // Ajusta el ancho del modal
-      height: 'auto', // Ajusta la altura del modal automáticamente
-      panelClass: 'custom-dialog-container' // Clase CSS personalizada para el modal
-    });
-  }
-
+  // 🔹 Inputs / Outputs
   @Input() set data(value: any[]) {
-    this._data = value.map((item, index) => ({ ...item, num: index + 1, flag: item.flag ?? false }));
-    this.totalPages = Math.ceil(this._data.length / this.rowsPerPage);
+    this._data = value.map((item, index) => ({ ...item, num: index + 1, flag: item.Flag ?? false }));
+    this.updatePagination();
   }
   get data() {
     return this._data;
@@ -39,10 +49,24 @@ export class TableComponent {
   private _data: User[] = [];
 
   @Input() columns: { key: string, label: string }[] = []; 
+  @Input() isDarkMode: boolean = false; // Controla el modo oscuro o claro
+  
   @Output() edit = new EventEmitter<any>();
   @Output() delete = new EventEmitter<any>();
 
-  constructor(private apiService: ApiService, private router: Router, private dialog: MatDialog, private cdr: ChangeDetectorRef) {}
+  // 🔹 Constructor
+  constructor(
+    private apiService: ApiService,
+    private snackBar: MatSnackBar,
+    private router: Router,
+    private dialog: MatDialog,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  // 🔹 Variables del componente
+  searchText: string = '';
+  searchKey: string = 'name';
+  action: string = 'name';
 
   currentPage: number = 1;
   rowsPerPage: number = 5;
@@ -50,122 +74,44 @@ export class TableComponent {
   sortColumn: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
   totalPages: number = 0;
- 
-  get sortedData() {
-  if (!this.sortColumn || this.sortColumn === 'num') {
-    return this.data;
-  }
-  return [...this.data].sort((a, b) => {
-    let valueA = a[this.sortColumn] ?? ''; 
-    let valueB = b[this.sortColumn] ?? ''; 
 
-    if (typeof valueA === 'string') valueA = valueA.toLowerCase();
-    if (typeof valueB === 'string') valueB = valueB.toLowerCase();
-
-    if (valueA < valueB) {
-      return this.sortDirection === 'asc' ? -1 : 1;
-    }
-    if (valueA > valueB) {
-      return this.sortDirection === 'asc' ? 1 : -1;
-    }
-    return 0;
-  });
-}
-
-getUsers(page: number, limit: number) {
-  this.apiService.getAllUsers(page, limit).subscribe({
-    next: (data) => {
-      console.log('Usuarios cargados:', data);
-      const newUsers = data.map((user: User) => ({
-        ...user,
-        flag: user.Flag ?? false
-      }));
-      const uniqueUsers = newUsers.filter((newUser: User) => !this._data.some(existingUser => existingUser._id === newUser._id));
-      this._data = [...this._data, ...uniqueUsers];
-      this._data = this._data.map((item, index) => ({ ...item, num: index + 1 })); // Recalculate numbering
-      this.totalPages = Math.ceil(this._data.length / this.rowsPerPage);
-    },
-    error: (err) => {
-      console.error('Error obteniendo los datos de los usuarios', err);
-    }
-  });
-}
-onSearchChange() {
-  this.currentPage = 1; // Reinicia a la primera página al cambiar el texto de búsqueda
-}
-
-      get paginatedData() {
-      // Filtrar los datos primero
-      const filteredData = new TableFilterPipe().transform(this.sortedData, this.searchText, [this.searchKey]);
-    
-      // Recalcular el número total de páginas basado en los datos filtrados
-      this.totalPages = Math.ceil(filteredData.length / this.rowsPerPage);
-    
-      // Ajustar la página actual si excede el número total de páginas
-      if (this.currentPage > this.totalPages) {
-        this.currentPage = this.totalPages || 1; // Si no hay resultados, vuelve a la página 1
-      }
-    
-      // Calcular el índice inicial y final para la paginación
-      const startIndex = (this.currentPage - 1) * this.rowsPerPage;
-      return filteredData.slice(startIndex, startIndex + this.rowsPerPage);
-    }
-  // get paginatedDataWithIndex() {
-  //   const startIndex = (this.currentPage - 1) * this.rowsPerPage;
-  //   return this.paginatedData.map((item, index) => ({
-  //     ...item,
-  //     num: startIndex + index + 1
-  //   }));
-  // }
-  
-  
-
-  onEdit(item: any) {
-    this.edit.emit(item);
+  // 🔹 Métodos de modal y acciones UI
+  openCreateUserModal() {
+    this.dialog.open(CreateUserComponent, {
+      width: '600px',
+      height: 'auto',
+      panelClass: 'custom-dialog-container'
+    });
   }
 
-  onDelete(item: any) {
-    this.delete.emit(item);
+  openEditUserModal(item: User) {
+    this.dialog.open(EditUserComponent, {
+      width: '600px',
+      height: 'auto',
+      panelClass: 'custom-dialog-container',
+      data: { userId: item._id }
+    });
   }
 
-  changePage(increment: number) {
-    if(increment === 1 && this.currentPage === this.totalPages)
-    {
-      this.getUsers(this.currentPage + 1, this.rowsPerPage);
-      
-    }
-    this.currentPage += increment;
+  copyToClipboard(value: string, event: MouseEvent) {
+    event.stopPropagation();
+    navigator.clipboard.writeText(value).then(() => {
+      this.snackBar.open('ID copiado al portapapeles', 'Cerrar', { duration: 3000, panelClass: ['snackbar-white-background'] });
+    }).catch(() => {
+      this.snackBar.open('Error al copiar al portapapeles', 'Cerrar', { duration: 3000, panelClass: ['snackbar-white-background'] });
+    });
   }
 
-  changeRowsPerPage(event: any) {
-
-    if(this.currentPage === this.totalPages)
-    {
-      this.getUsers(this.currentPage , parseInt(event.target.value, 10));
-    }
-    this.rowsPerPage = parseInt(event.target.value, 10);
-
-    this.currentPage = 1; // Reset to first page
+  // 🔹 Navegación
+  editUser(item: User) {
+    this.router.navigate(['/edit', item._id]);
   }
 
-  changePageToFirst() {
-    this.currentPage = 1;
+  ViewProfile(item: User) {
+    this.router.navigate(['/profile', item._id], { queryParams: { isDarkTheme: this.isDarkMode } });
   }
 
-  changePageToLast() {
-    this.currentPage = Math.ceil(this.data.length / this.rowsPerPage);
-  }
-
-  sortData(column: string) {
-    if (this.sortColumn === column) {
-      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.sortColumn = column;
-      this.sortDirection = 'asc';
-    }
-    this.currentPage = 1; // Reset to first page
-  }
-
+  // 🔹 CRUD Flags
   inactivateUser(item: User) {
     this.apiService.inactivateUser(item._id).subscribe({
       next: (data) => {
@@ -176,8 +122,9 @@ onSearchChange() {
       error: (err) => {
         console.error('Error inactivando el usuario', err);
       }
-  });
-}
+    });
+  }
+
   activateUser(item: User) {
     this.apiService.activateUser(item._id).subscribe({
       next: (data) => {
@@ -188,26 +135,112 @@ onSearchChange() {
       error: (err) => {
         console.error('Error activando el usuario', err);
       }
-  });
+    });
+  }
 
-}
+  onFlagChange(item: User): void {
+    item.Flag ? this.inactivateUser(item) : this.activateUser(item);
+  }
 
-editUser(item: User) {
-  this.router.navigate(['/edit', item._id]);
-}
+  // 🔹 Eventos del usuario
+  onEdit(item: any) {
+    this.edit.emit(item);
+  }
 
-ViewProfile(item: User) {
-  this.router.navigate(['/profile', item._id]);
-}
-copyToClipboard(value: string, event: MouseEvent) {
-  event.stopPropagation(); // Evita que se active el evento de clic en la fila
-  navigator.clipboard.writeText(value).then(() => {
-    console.log(`Valor copiado al portapapeles: ${value}`);
-    alert('ID copiado al portapapeles');
-  }).catch(err => {
-    console.error('Error al copiar al portapapeles:', err);
-  });
-}
+  onDelete(item: any) {
+    this.delete.emit(item);
+  }
 
+  // 🔹 Ordenamiento y búsqueda
+  sortData(column: string) {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+    this.currentPage = 1;
+  }
 
+  onSearchChange() {
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
+  get sortedData() {
+    if (!this.sortColumn || this.sortColumn === 'num') {
+      return this.data;
+    }
+    return [...this.data].sort((a, b) => {
+      let valueA = a[this.sortColumn] ?? '';
+      let valueB = b[this.sortColumn] ?? '';
+      if (typeof valueA === 'string') valueA = valueA.toLowerCase();
+      if (typeof valueB === 'string') valueB = valueB.toLowerCase();
+      if (valueA < valueB) return this.sortDirection === 'asc' ? -1 : 1;
+      if (valueA > valueB) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  // 🔹 Paginación
+  get paginatedData() {
+    const filteredData = new TableFilterPipe().transform(this.sortedData, this.searchText, [this.searchKey]);
+    const startIndex = (this.currentPage - 1) * this.rowsPerPage;
+    return filteredData.slice(startIndex, startIndex + this.rowsPerPage);
+  }
+
+  calculatePageNumbers() {
+    return Math.ceil(this.data.length / this.rowsPerPage);
+  }
+
+  updatePagination() {
+    this.totalPages = this.calculatePageNumbers();
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages || 1;
+    }
+  }
+
+  changePage(increment: number) {
+    if (increment === 1 && this.currentPage === this.totalPages) {
+      this.getUsers(this.currentPage + 1, this.rowsPerPage);
+    }
+    this.currentPage += increment;
+  }
+
+  changePageToFirst() {
+    this.currentPage = 1;
+  }
+
+  changePageToLast() {
+    this.currentPage = Math.ceil(this.data.length / this.rowsPerPage);
+  }
+
+  changeRowsPerPage(event: any) {
+    if (this.currentPage === this.totalPages) {
+      this.getUsers(this.currentPage, parseInt(event.target.value, 10));
+    }
+    this.rowsPerPage = parseInt(event.target.value, 10);
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
+  // 🔹 Carga de datos desde la API
+  getUsers(page: number, limit: number) {
+    this.apiService.getAllUsers(page, limit).subscribe({
+      next: (data) => {
+        console.log('Usuarios cargados:', data);
+        const newUsers = data.map((user: User) => ({
+          ...user,
+          flag: user.Flag ?? false
+        }));
+        const uniqueUsers = newUsers.filter((newUser: User) => !this._data.some(existingUser => existingUser._id === newUser._id));
+        this._data = [...this._data, ...uniqueUsers];
+        this._data = this._data.map((item, index) => ({ ...item, num: index + 1 }));
+        this.totalPages = Math.ceil(this._data.length / this.rowsPerPage);
+      },
+      error: (err) => {
+        console.error('Error obteniendo los datos de los usuarios', err);
+      }
+    });
+  }
 }

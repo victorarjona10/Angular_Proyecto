@@ -25,7 +25,7 @@ export class CreateUserComponent {
       password: ['', Validators.required],
       phone: ['', Validators.required],
       wallet: ['', Validators.required],
-      Flag: [false]
+      flag: [false]
     });
   }
 
