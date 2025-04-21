@@ -6,6 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ShortStringPipe implements PipeTransform {
 
   transform(value: string): string {
+
     // Check if the value is null or undefined
     if (value === null || value === undefined) {
       return value;
