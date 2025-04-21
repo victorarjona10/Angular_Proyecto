@@ -1,0 +1,26 @@
+.order-details {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 8px;
+}
+
+.order-details ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-details li {
+  margin: 8px 0;
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  position : relative;
+}
+
+.btn-danger {
+  position: absolute;
+  right: 0px; /* Mueve el botón a la izquierda del contenedor */
+}

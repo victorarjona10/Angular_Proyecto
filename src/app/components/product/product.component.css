@@ -1,0 +1,37 @@
+.product-details {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px 0;
+  border-radius: 8px;
+}
+
+.product-details h2 {
+  margin-top: 0;
+}
+
+.product-details p {
+  margin: 4px 0;
+}
+
+.button-container {
+  display: flex;
+  gap: 30px; /* Espaciado entre los botones */
+  margin-top: 10px;
+}
+
+.quantity-button {
+  color: white;
+  border: none;
+  border-radius: 8px; 
+  padding: 10px 15px; 
+  font-size: 16px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+  width: 40px;
+}
+
+
+
+
+
+

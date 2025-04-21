@@ -1,0 +1,18 @@
+<div class="login-container">
+  <h2 class="tuclase">Login</h2>
+  <form>
+    <div class="input-container">
+      <input type="text" placeholder="Email" [(ngModel)]="email" name="email" required />
+    </div>
+    <div class="input-container">
+      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+    </div>
+    <button type="submit" (click)="login()">Login</button>
+    
+    <button type="button" class="google-login-btn" (click)="loginWithGoogle()">
+      Login with Google
+    </button>
+    
+    <p style="color: blue; text-decoration: underline; cursor: pointer;" (click)="signup()">Signup</p>
+  </form>
+</div>

@@ -1,0 +1,13 @@
+<!-- From Uiverse.io by VijinV --> 
+<div class="inputbox">
+    <input 
+      [type]="type" 
+      [value]="value" 
+      [disabled]="isDisabled" 
+      (input)="onInputChange($event)" 
+      (blur)="onInputBlur()" 
+      required="required"
+    />
+    <span>{{ text }}</span>
+    <i></i>
+  </div>

@@ -1,0 +1,28 @@
+
+
+<div class="filter-search-container">
+  <button-blue [text]="isFormVisible ? 'Ocultar Filtros' : 'Mostrar Filtros'" class="btn btn-primary" (click)="toggleForm()">
+
+  </button-blue>
+
+
+  <form *ngIf="isFormVisible" [formGroup]="searchForm" (ngSubmit)="onSearch()">
+
+    <div class="form-group">
+      <input-form [text] = "'Name'" formControlName="name" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <input-form [text] = "'Email'"  formControlName="email" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <input-form [text] = "'Phone'"  formControlName="phone" type="text" class="form-control" />
+    </div>
+
+    <div class="button-group">
+      <button-blue [text]="'Buscar'" type="submit" class="btn btn-primary"></button-blue>
+      <button-blue [text]="'Reset'" type="button" class="btn btn-secondary" (click)="resetFilters()"></button-blue>
+    </div>
+  </form>
+</div>

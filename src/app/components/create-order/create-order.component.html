@@ -1,0 +1,23 @@
+<h2>Crear Orden</h2>
+<form (ngSubmit)="createOrder()">
+
+    <label for="userId">Usuario:</label>
+    <input id="userId" [(ngModel)]="order.user_id" name="userId" readonly />
+
+
+    <div *ngFor="let product of order.products; let i = index" class="product-entry">
+        <label for="productId-{{ i }}">Producto {{ i + 1 }}:</label>
+        <input id="productId-{{ i }}" [(ngModel)]="product.product_id" name="productId-{{ i }}" required />
+    
+        <label for="quantity-{{ i }}">Cantidad:</label>
+        <input id="quantity-{{ i }}" type="number" [(ngModel)]="product.quantity" name="quantity-{{ i }}" required />
+    
+        <button type="button" (click)="removeProduct(i)">Eliminar</button>
+      </div>
+    
+      <button type="button" class="aggregate" (click)="addProduct()">Añadir Producto</button>
+    
+
+  <button type="submit">Crear</button>
+  <button type="button" (click)="close()">Cancelar</button>
+</form>
