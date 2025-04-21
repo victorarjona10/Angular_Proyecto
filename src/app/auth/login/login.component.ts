@@ -1,4 +1,5 @@
 // login.component.ts
+
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { FormsModule } from '@angular/forms';
@@ -58,25 +59,26 @@ export class LoginComponent {
   }
   
   // 修改loginWithGoogle方法
-  loginWithGoogle() {
-    const googleAuthUrl = 'http://localhost:4000/api/users/auth/google';
+  loginWithGoogle(): void {
+    const origin = window.location.origin; // Obtiene el origen actual
+    console.log('Origin:', origin); // Verifica el origen en la consola
+    const googleAuthUrl = `http://localhost:4000/api/users/auth/google?origin=${encodeURIComponent(origin)}`;
+    console.log('Google Auth URL:', googleAuthUrl);
     const width = 500;
     const height = 600;
-    const left = (screen.width - width) / 2;
-    const top = (screen.height - height) / 2;
-    
-    // 打开Google登录窗口
+    const left = (window.screen.width - width) / 2;
+    const top = (window.screen.height - height) / 2;
+  
     const googleAuthWindow = window.open(
       googleAuthUrl,
       'googleAuth',
       `width=${width},height=${height},left=${left},top=${top}`
     );
   
-    // 添加窗口关闭检测
     const checkWindowClosed = setInterval(() => {
       if (googleAuthWindow && googleAuthWindow.closed) {
         clearInterval(checkWindowClosed);
-        // 可以在这里添加一些处理逻辑
+        console.log('Google Auth window closed.');
       }
     }, 500);
   }
