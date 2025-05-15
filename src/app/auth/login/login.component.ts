@@ -62,7 +62,7 @@ export class LoginComponent {
   loginWithGoogle(): void {
     const origin = window.location.origin; // Obtiene el origen actual
     console.log('Origin:', origin); // Verifica el origen en la consola
-    const googleAuthUrl = `http://localhost:4000/api/users/auth/google?origin=${encodeURIComponent(origin)}`;
+    const googleAuthUrl = `http://ea6-api.upc.edu/api/users/auth/google?origin=${encodeURIComponent(origin)}`;
     console.log('Google Auth URL:', googleAuthUrl);
     const width = 500;
     const height = 600;

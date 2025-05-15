@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:4000/api'; // Canvia aquesta URL per la teva API
+  private apiUrl = `http://ea6-api.upc.edu/api`; // Canvia aquesta URL per la teva API
 
   constructor(private http: HttpClient) {}
 
@@ -90,8 +88,6 @@ export class ApiService {
     const body = { 
       email: email,
       password: password };
-    return this.http.post<any>(`${this.apiUrl}/admins/login`, body);
+    return this.http.post<any>(`${this.apiUrl}/users/login`, body);
   }
-
-
 }
