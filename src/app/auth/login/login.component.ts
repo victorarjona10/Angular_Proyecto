@@ -26,13 +26,14 @@ export class LoginComponent {
 
   
   login() {
+    alert('le has dado al login');
     this.apiService.Login(this.email, this.password).subscribe({
       next: (res) => {
         console.log('Login correcte', res);
-        localStorage.setItem('token', res.admin.token); 
-        console.log('Token guardat:', res.admin.token);
-        localStorage.setItem('refresh_token', res.admin.refreshToken);
-        console.log('Refresh Token guardat:', res.admin.refreshToken);
+        localStorage.setItem('token', res.token); 
+        console.log('Token guardat:', res.token);
+        localStorage.setItem('refresh_token', res.refreshToken);
+        console.log('Refresh Token guardat:', res.refreshToken);
         localStorage.setItem('email', this.email);
         alert('Login correcte!');
         this.router.navigate(['/home']);
