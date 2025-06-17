@@ -47,7 +47,7 @@ export class LoginComponent {
 
   private handleGoogleLoginMessage(event: MessageEvent) {
     // 安全验证：确保消息来自Google回调页面
-    if (event.origin !== 'http://localhost:4000') return;
+    if (event.origin !== 'https://ea6-api.upc.edu') return;
     
     if (event.data.token) {
       // 存储token并跳转
@@ -63,7 +63,7 @@ export class LoginComponent {
   loginWithGoogle(): void {
     const origin = window.location.origin; // Obtiene el origen actual
     console.log('Origin:', origin); // Verifica el origen en la consola
-    const googleAuthUrl = `http://ea6-api.upc.edu/api/users/auth/google?origin=${encodeURIComponent(origin)}`;
+    const googleAuthUrl = `https://ea6-api.upc.edu/api/users/auth/google?origin=${encodeURIComponent(origin)}`;
     console.log('Google Auth URL:', googleAuthUrl);
     const width = 500;
     const height = 600;

@@ -31,7 +31,7 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
         if (error.status === 401 && refreshToken && !isRefreshing) {
           isRefreshing = true;
           console.log('Token caducado. Intentando renovar el token...');
-          return http.post<any>('http://ea6-api.upc.edu/api/admins/auth/refresh', { refreshToken }).pipe(
+          return http.post<any>('https://ea6-api.upc.edu/api/admins/auth/refresh', { refreshToken }).pipe(
           
             switchMap((response: { token: string; refreshToken: string }) => {
               console.log('Nuevo Access Token recibido:', response.token);

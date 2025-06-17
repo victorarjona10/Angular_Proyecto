@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = `http://ea6-api.upc.edu/api`; // Canvia aquesta URL per la teva API
+  private apiUrl = `https://ea6-api.upc.edu/api`; // Canvia aquesta URL per la teva API
 
   constructor(private http: HttpClient) {}
 
@@ -100,7 +100,7 @@ export class ApiService {
   getAllFeedback(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/feedback`);
 
-    
+
   }
 
   updateFeedbackStatus(feedbackId: string, status: string): Observable<any> {
