@@ -7,8 +7,8 @@
   <p><strong>Product ID:</strong> {{ product?.product_id._id ? product?.product_id._id : 'No tiene ID' }}</p>
 
   <div class="button-container">
-    <button class="quantity-button add" (click)="addQuantity()">+</button>
-    <button class="quantity-button subtract" (click)="lessQuantity()">-</button>
+    <button-green [text] = "'+'" class="quantity-button add" (click)="addQuantity()"></button-green>
+    <button-red [text] = "'-'" class="quantity-button subtract" (click)="lessQuantity()"></button-red>
   </div>
 </div>
 

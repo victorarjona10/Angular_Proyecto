@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.snackbar-white-background {
+  background-color: white !important; /* Fondo blanco */
+  color: rgb(0, 0, 0) !important; /* Texto negro para contraste */
+  border: 1px solid #ccc; /* Borde opcional */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+}

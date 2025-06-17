@@ -3,20 +3,23 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../models/user';
+import { CommonModule } from '@angular/common';
+import { BlueComponent } from '../../UI/buttons/blue/blue.component';
+import { FormInputComponent } from '../../UI/input-text/form-input/form-input.component';
 
 @Component({
   selector: 'app-filter-search',
   templateUrl: './filter-search.component.html',
   styleUrls: ['./filter-search.component.css'],
-  imports: [ReactiveFormsModule]
+  imports: [ReactiveFormsModule, CommonModule, BlueComponent, FormInputComponent],
 })
 export class FilterSearchComponent {
   isFormVisible: boolean = false;
   searchForm: FormGroup;
   @Output() searchResults = new EventEmitter<User[]>();
+
   constructor(private fb: FormBuilder, private apiService: ApiService) {
     this.searchForm = this.fb.group({
-      id: [''],
       name: [''],
       email: [''],
       phone: ['']
@@ -45,6 +48,10 @@ export class FilterSearchComponent {
     this.apiService.getUsersByFiltration(cleanedParams, this.page, this.limit).subscribe({
       next: (data) => {
         console.log('Usuarios encontrados:', data);
+        const processedData = data.map((user: User) => ({
+          ...user,
+          flag: user.Flag ?? true, // Inicializa `flag` si no está presente
+        }));
         this.searchResults.emit(data);
       },
       error: (err) => {

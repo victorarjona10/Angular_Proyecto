@@ -1,0 +1,11 @@
+services:
+  angular:
+    image: backoffice2_0:latest
+    ports: 
+      - "8080:80"
+    networks:
+      - public
+
+networks:
+  public:
+    external: true
