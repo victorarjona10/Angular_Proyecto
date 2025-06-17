@@ -93,5 +93,22 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/admins/login`, body);
   }
 
+  signup(user: { email: string, password: string}): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users`, user);
+  }
+
+  getAllFeedback(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/feedback`);
+  }
+
+  updateFeedbackStatus(feedbackId: string, status: string): Observable<any> {
+    const body = { status: status };
+    return this.http.put<any>(`${this.apiUrl}/feedback/${feedbackId}/status`, body);
+  }
+
+  getFeedbackByUser(userId: string) {
+  return this.http.get(`${this.apiUrl}/feedback/user/${userId}`);
+}
+
 
 }

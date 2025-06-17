@@ -1,0 +1,244 @@
+/* Contenedores principales, reutilizando estilos similares a backoffice */
+.container-dark {
+  width: 100vw;
+  background-attachment: fixed; /* Fija el fondo para que abarque todo el contenido */
+  background-size: cover; /* Asegura que el fondo cubra todo el área */
+  overflow: auto;
+  min-height: 100vh;
+  height: auto;
+  width: auto;
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        #282828 23.5%,
+        rgba(255, 170, 0, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        #2c3539 24%,
+        rgba(240, 166, 17, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        #282828 14%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 85%,
+        #282828 0
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        #282828 24%,
+        #2c3539 0,
+        #2c3539 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #2c3539 0,
+        #2c3539 76%,
+        #282828 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        #282828 24%,
+        #2c3539 0,
+        #2c3539 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #2c3539 0,
+        #2c3539 76%,
+        #282828 0
+      )
+      0 0,
+    linear-gradient(90deg, #2c3539 2%, #282828 0, #282828 98%, #2c3539 0%) 0 0
+      #282828;
+  background-size: 40px 60px;
+}
+
+.container-light {
+  background-attachment: fixed; /* Fija el fondo para que abarque todo el contenido */
+  background-size: cover; /* Asegura que el fondo cubra todo el área */
+  overflow: auto;
+  width: 100vw;
+  min-height: 100vh;
+  height: auto;
+  width: auto;
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        #f0f0f0 23.5%,
+        rgba(255, 255, 255, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        #e0e0e0 24%,
+        rgba(255, 255, 255, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        #f0f0f0 14%,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0) 85%,
+        #f0f0f0 0
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        #f0f0f0 24%,
+        #e0e0e0 0,
+        #e0e0e0 26%,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0) 74%,
+        #e0e0e0 0,
+        #e0e0e0 76%,
+        #f0f0f0 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        #f0f0f0 24%,
+        #e0e0e0 0,
+        #e0e0e0 26%,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0) 74%,
+        #e0e0e0 0,
+        #e0e0e0 76%,
+        #f0f0f0 0
+      )
+      0 0,
+    linear-gradient(90deg, #e0e0e0 2%, #f0f0f0 0, #f0f0f0 98%, #e0e0e0 0%) 0 0
+      #f0f0f0;
+  background-size: 40px 60px;
+}
+
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 0;
+}
+
+.left-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 32px 40px;
+  min-width: 350px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.container-dark .left-container {
+  background: #2c2f36;
+  color: #f5f6fa;
+}
+
+h2.tuclase {
+  margin-top: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.container-dark h2.tuclase {
+  color: #f5f6fa;
+}
+
+form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+textarea {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+  margin-bottom: 16px;
+  background: #fff;
+  color: #23272f;
+}
+
+.container-dark textarea {
+  background: #23272f;
+  color: #f5f6fa;
+  border: 1px solid #444857;
+}
+
+button[type="submit"] {
+  background: #2b6cb0;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: #225ea8;
+}
+
+.feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background: #fff;
+}
+
+.feedback-table th, .feedback-table td {
+  border: 1px solid #e2e8f0;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.feedback-table th {
+  background: #f7fafc;
+  font-weight: 600;
+}
+
+.container-dark .feedback-table {
+  background: #23272f;
+  color: #f5f6fa;
+}
+
+.container-dark .feedback-table th {
+  background: #2c2f36;
+}
+
+.feedback-table select {
+  padding: 6px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  background: #f7fafc;
+  color: #23272f;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.feedback-table select:focus {
+  border: 1.5px solid #2b6cb0;
+  background: #fff;
+}
+
+.container-dark .feedback-table select {
+  background: #23272f;
+  color: #f5f6fa;
+  border: 1px solid #444857;
+}
+
+.container-dark .feedback-table select:focus {
+  background: #2c2f36;
+  border: 1.5px solid #4299e1;
+}
