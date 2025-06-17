@@ -61,8 +61,8 @@ export class ApiService {
     // Convertir el objeto user en query parameters
     const params = new HttpParams({ fromObject: user });
 
-    return this.http.get<any>(`${this.apiUrl}/users/usersByFiltration`, { params });
-}
+    return this.http.get<any>(`${this.apiUrl}/users/usersByFiltration`, { params });}
+
 
   updateOrderQuantity(orderId: string, productId: string, quantityValue: number): Observable<any> {
     const body = {
@@ -91,4 +91,26 @@ export class ApiService {
       password: password };
     return this.http.post<any>(`${this.apiUrl}/users/login`, body);
   }
+
+
+  signup(user: { email: string, password: string}): Observable<any> {
+    return this.http.post(`${this.apiUrl}/users`, user);
+  }
+
+  getAllFeedback(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/feedback`);
+
+    
+  }
+
+  updateFeedbackStatus(feedbackId: string, status: string): Observable<any> {
+    const body = { status: status };
+    return this.http.put<any>(`${this.apiUrl}/feedback/${feedbackId}/status`, body);
+  }
+
+  getFeedbackByUser(userId: string) {
+  return this.http.get(`${this.apiUrl}/feedback/user/${userId}`);
 }
+}
+
+

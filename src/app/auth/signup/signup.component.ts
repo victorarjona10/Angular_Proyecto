@@ -1,8 +1,8 @@
 // signup.component.ts
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,11 +18,11 @@ export class SignupComponent {
   phone: string = '';
   wallet: number = 0;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private apiservice: ApiService, private router: Router) {}
 
   signup() {
     const user = { name: this.name, email: this.email, password: this.password, phone: this.phone, wallet: this.wallet };
-    this.authService.signup(user).subscribe({
+    this.apiservice.signup(user).subscribe({
       next: (res) => {
         console.log('Signup correcte', res);
         alert('Registre correcte!');

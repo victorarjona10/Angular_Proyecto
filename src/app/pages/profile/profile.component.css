@@ -216,3 +216,17 @@ html, body {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.profile-feedback {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-feedback li {
+  background: #f7fafc;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}

@@ -2,10 +2,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { Bb8ToggleComponent } from '../../UI/bb8-toggle/bb8-toggle.component';
 import { RedComponent } from '../../UI/buttons/red/red.component';
 import { Router } from '@angular/router';
+import { BlueComponent } from '../../UI/buttons/blue/blue.component';
 
 @Component({
   selector: 'navbar',
-  imports: [Bb8ToggleComponent, RedComponent],
+  imports: [Bb8ToggleComponent, RedComponent, BlueComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -24,5 +25,9 @@ export class NavbarComponent {
       this.router.navigate(['/login']);
       localStorage.removeItem('token'); // Elimina el token del localStorage
       localStorage.removeItem('email'); // Elimina el usuario del localStorage
+    }
+
+    feedback(){
+      this.router.navigate(['/feedback']);
     }
 }

@@ -1,0 +1,46 @@
+<div [class]="isDarkTheme ? 'container-dark' : 'container-light'">
+
+  <navbar (themeChange)="isDarkTheme = $event"></navbar>
+
+  <div class="home-container">
+    <div class="left-container">
+      
+
+      <!-- Tabla de feedbacks -->
+      <h3 style="margin-top:32px;">Feedbacks recibidos</h3>
+      <table *ngIf="feedbacks.length > 0" class="feedback-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th>Email</th>
+            <th>Título</th>
+            <th>Mensaje</th>
+            <th>Tipo</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fb of feedbacks; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ fb.created_at | date:'short' }}</td>
+            <td>{{ fb.user_id?.name || '-' }}</td>
+            <td>{{ fb.user_id?.email || '-' }}</td>
+            <td>{{ fb.title }}</td>
+            <td>{{ fb.message }}</td>
+            <td>{{ fb.type }}</td>
+            <td>
+              <select [value]="fb.status" (change)="onStatusChange(fb, $event)">
+                <option value="pending">pending</option>
+                <option value="reviewed">reviewed</option>
+                <option value="resolved">resolved</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="feedbacks.length === 0" style="margin-top:16px;">No hay feedbacks aún.</div>
+    </div>
+  </div>
+</div>

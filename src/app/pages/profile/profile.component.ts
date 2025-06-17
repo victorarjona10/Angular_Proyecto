@@ -23,9 +23,9 @@ export class ProfileComponent implements OnInit{
 
   user: User = new User();
   isDarkTheme: boolean = false; // Controla el modo oscuro o claro
-
+  showOrders: boolean = false;
   orders: Order[] = [];
-
+  
     constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router, private dialog: MatDialog) {}
   
     ngOnInit(): void {
@@ -35,6 +35,10 @@ export class ProfileComponent implements OnInit{
         this.isDarkTheme = params['isDarkTheme'] === 'true'; // Convertir el string a booleano
       });
     }
+      verFeedbackUsuario() {
+        const userId = this.route.snapshot.paramMap.get('id');
+        this.router.navigate(['/feedback', userId]);
+      }
   
     loadUser() {
       const userId = this.route.snapshot.paramMap.get('id');  
